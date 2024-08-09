@@ -1,9 +1,13 @@
-
 # Searching Algorithms
 
 ## Overview
 
 Searching algorithms are fundamental techniques used in computer science to retrieve information stored within some data structure. They are essential for efficient data retrieval and are widely used in various applications, from databases to search engines. There are several types of searching algorithms, each with its own advantages and use cases.
+
+## Navigation
+
+- [Binary Search](#binary-search)
+- [Linear Search](#linear-search)
 
 ## Binary Search
 
@@ -27,8 +31,6 @@ Binary search operates in logarithmic time, meaning that the time it takes to se
     - If the target value is less than the middle element, adjust the `high` pointer to `mid - 1` and repeat the process for the left subarray.
     - If the target value is greater than the middle element, adjust the `low` pointer to `mid + 1` and repeat the process for the right subarray.
 4. **Repeat**: Continue the process until the `low` pointer exceeds the `high` pointer, indicating that the target value is not present in the list.
-
-
 
 ### Steps and Example
 
@@ -65,4 +67,51 @@ low and high are indexes.
 
 ### Implementation in C#.NET 8
 
-You can see the implementation of Binary Search in C# in code written in `BinarySearch.cs` class.
+You can see the implementation of Binary Search in C# in code written in the `BinarySearch.cs` class.
+
+## Linear Search
+
+### Description
+
+Linear search is the simplest searching algorithm. It works by iterating through each element in a list or array until it finds the target value. Unlike binary search, linear search does not require the data to be sorted, making it applicable in more general cases, though it is less efficient.
+
+### Performance
+
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+
+Linear search operates in linear time, meaning that the time it takes to search an element grows linearly with the size of the input data. This makes linear search less efficient for large datasets compared to binary search.
+
+### How It Works
+
+1. **Initial Setup**: Start from the first element in the array or list.
+2. **Iteration**: Check each element one by one:
+    - If the current element matches the target value, the search is successful, and the index of that element is returned.
+    - If the current element does not match the target value, move to the next element.
+3. **Repeat**: Continue the process until either the target is found, or the end of the list is reached, indicating that the target is not present.
+
+### Steps and Example
+
+Let's consider an example where we search for the value 7 in an unsorted array: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1].
+
+1. Initial array: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+   - Start at index 0: value = 10 (no match)
+   - Move to index 1: value = 9 (no match)
+   - Move to index 2: value = 8 (no match)
+   - Move to index 3: value = 7 (match found)
+
+2. 7 == 7: Target found at index 3.
+
+### Advantages
+
+- **Simplicity**: Linear search is easy to understand and implement.
+- **Flexibility**: It can be used on unsorted data and works on all data structures that allow traversal.
+
+### Limitations
+
+- **Efficiency**: Linear search is less efficient than binary search for large datasets.
+- **Scalability**: As the size of the dataset grows, the time taken by linear search increases linearly, making it impractical for large datasets.
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Linear Search in C# in code written in the `LinearSearch.cs` class.
