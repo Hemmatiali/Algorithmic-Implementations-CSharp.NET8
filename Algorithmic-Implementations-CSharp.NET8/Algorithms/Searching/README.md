@@ -8,6 +8,7 @@ Searching algorithms are fundamental techniques used in computer science to retr
 
 - [Binary Search](#binary-search)
 - [Linear Search](#linear-search)
+- [Sentinel Linear Search](#sentinel-linear-search)
 
 ## Binary Search
 
@@ -115,3 +116,52 @@ Let's consider an example where we search for the value 7 in an unsorted array: 
 ### Implementation in C#.NET 8
 
 You can see the implementation of Linear Search in C# in code written in the `LinearSearch.cs` class.
+
+## Sentinel Linear Search
+
+### Description
+
+Sentinel linear search is an optimization of the standard linear search algorithm. It works by placing a sentinel value at the end of the array or list, which simplifies the loop condition and reduces the number of comparisons required. This technique is particularly useful when the array or list is large, as it slightly improves the performance of the search.
+
+### Performance
+
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+
+Like standard linear search, sentinel linear search operates in linear time. However, it minimizes the number of checks required to determine whether the target is in the list, making it slightly faster in practice.
+
+### How It Works
+
+1. **Initial Setup**: Place the target value as a sentinel at the end of the array or list.
+2. **Iteration**: Start from the first element:
+    - If the current element matches the target value, the search is successful, and the index of that element is returned.
+    - If the current element does not match, move to the next element.
+3. **Sentinel Check**: The loop stops when the target is found, including the sentinel. If the match occurs at the sentinel position, the method checks whether the target was genuinely found within the original bounds of the array or list.
+4. **Repeat**: Continue until the target is found or the sentinel is reached.
+
+### Steps and Example
+
+Let's consider an example where we search for the value 7 in an unsorted array: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1].
+
+1. Initial array: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+   - Place sentinel at the end of the array.
+   - Start at index 0: value = 10 (no match)
+   - Move to index 1: value = 9 (no match)
+   - Move to index 2: value = 8 (no match)
+   - Move to index 3: value = 7 (match found)
+
+2. 7 == 7: Target found at index 3.
+
+### Advantages
+
+- **Efficiency**: Sentinel linear search reduces the number of comparisons needed, making it slightly more efficient than the standard linear search and it is like Guard class for standard linear search.
+- **Simplicity**: The algorithm is easy to understand and implement, similar to the standard linear search.
+
+### Limitations
+
+- **Efficiency Gain**: The efficiency gain is minimal compared to standard linear search, so it's most beneficial in large datasets.
+- **Applicability**: While it improves linear search, it still doesn't compare to more advanced algorithms like binary search for sorted datasets.
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Sentinel Linear Search in C# in code written in the `SentinelLinearSearch.cs` class.
