@@ -17,6 +17,9 @@ class Program
 
         // Section: Sentinel Linear Search
         RunSentinelLinearSearchDemo();
+
+        // Section: Meta Binary Search
+        RunMetaBinarySearchDemo();
     }
 
     #region Algorithms
@@ -88,6 +91,29 @@ class Program
         // Perform sentinel linear search on the list and display the result
         int listResult = SentinelLinearSearch.Search(list, target);
         Console.WriteLine($"Sentinel Linear Search in List: Target found at index {listResult}");
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Meta Binary Search algorithms.
+    /// </summary>
+    private static void RunMetaBinarySearchDemo()
+    {
+        // Create a sorted array for the demonstration
+        int[] sortedArray = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };
+
+        // Define the target value to search for
+        const int target = 15;
+
+        // Perform recursive meta binary search and display the result
+        int recursiveResult = MetaBinarySearch.RecursiveSearch(sortedArray, target);
+        Console.WriteLine($"Recursive Meta Binary Search: Target found at index {recursiveResult}");
+
+        // Create a sorted list for the demonstration
+        List<int> sortedList = new List<int> { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };
+
+        // Perform bitwise meta binary search and display the result
+        int bitwiseResult = MetaBinarySearch.BitwiseSearch(sortedList, target);
+        Console.WriteLine($"Bitwise Meta Binary Search: Target found at index {bitwiseResult}");
     }
 
     #endregion

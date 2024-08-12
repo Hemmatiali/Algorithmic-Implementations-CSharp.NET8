@@ -9,6 +9,7 @@ Searching algorithms are fundamental techniques used in computer science to retr
 - [Binary Search](#binary-search)
 - [Linear Search](#linear-search)
 - [Sentinel Linear Search](#sentinel-linear-search)
+- [Meta Binary Search](#meta-binary-search)
 
 ## Binary Search
 
@@ -165,3 +166,83 @@ Let's consider an example where we search for the value 7 in an unsorted array: 
 ### Implementation in C#.NET 8
 
 You can see the implementation of Sentinel Linear Search in C# in code written in the `SentinelLinearSearch.cs` class.
+
+
+## Meta Binary Search
+
+### Description
+
+Meta Binary Search is an advanced variation of the standard binary search algorithm. It utilizes either recursion or bitwise operations to perform the search in a more structured or efficient manner. This method is particularly useful when dealing with sorted data and offers an alternative approach to the standard binary search.
+
+### Performance
+
+- **Time Complexity**: O(log n)
+- **Space Complexity**: 
+  - Recursive Approach: O(log n) due to the stack space used by recursion.
+  - Bitwise Approach: O(1) as it operates without additional stack space.
+
+Both approaches maintain logarithmic time complexity, making Meta Binary Search highly efficient for large datasets.
+
+### How It Works
+
+#### Recursive Meta Binary Search
+
+1. **Initial Setup**: Start by dividing the array into halves recursively.
+2. **Middle Calculation**: Calculate the middle index of the current range.
+3. **Comparison**:
+    - If the target matches the middle element, the search is successful.
+    - If the target is less than the middle element, search in the left half.
+    - If the target is greater than the middle element, search in the right half.
+4. **Repeat**: Continue the process recursively until the target is found or the search range is invalid.
+
+#### Bitwise Meta Binary Search
+
+1. **Bit Calculation**: Determine the number of bits needed to represent the largest index.
+2. **Bitwise Construction**: Use bitwise operations to construct and navigate potential indices.
+3. **Comparison**:
+    - Use the constructed indices to compare with the target.
+    - Adjust the current position based on the comparison.
+4. **Repeat**: Continue the process using bitwise operations until the target is found.
+
+### Steps and Example
+
+Let's consider an example where we search for the value 13 in a sorted array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19].
+
+#### Recursive Meta Binary Search Example:
+
+1. Initial array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+   - Start at indices 0 to 9.
+   - Calculate middle: mid = (0 + 9) / 2 = 4, value = 9
+   - 13 > 9: Search the right subarray.
+   - Update indices to 5 to 9.
+   - Calculate middle: mid = (5 + 9) / 2 = 7, value = 15
+   - 13 < 15: Search the left subarray.
+   - Update indices to 5 to 6.
+   - Calculate middle: mid = (5 + 6) / 2 = 5, value = 11
+   - 13 > 11: Search the right subarray.
+   - Update indices to 6 to 6.
+   - Calculate middle: mid = 6, value = 13
+   - 13 == 13: Target found at index 6.
+
+#### Bitwise Meta Binary Search Example:
+
+1. Initial array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+   - Calculate the number of bits required for the largest index (9 in binary is 1001, so 4 bits).
+   - Construct index using bitwise operations and navigate the array.
+   - Adjust indices based on comparisons until the target is found.
+
+### Advantages
+
+- **Efficiency**: Meta Binary Search is as efficient as standard binary search but offers additional flexibility with its recursive and bitwise approaches.
+- **Bitwise Operations**: The bitwise approach can be faster in certain environments where bitwise operations are optimized.
+
+The advantage of Meta Binary Search over binary search is that it can perform fewer comparisons in some cases, particularly when the target element is close to the beginning of the list. The disadvantage is that the algorithm may perform more comparisons than binary search in other cases, particularly when the target element is close to the end of the list. Therefore, Meta Binary Search is most effective when the list is ordered in a way that is consistent with the distribution of the target elements.
+
+### Limitations
+
+- **Complexity**: The bitwise approach may be harder to understand and implement compared to standard binary search.
+- **Applicability**: As with binary search, Meta Binary Search is only applicable to sorted datasets.
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Meta Binary Search in C# in code written in the `MetaBinarySearch.cs` class.
