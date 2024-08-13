@@ -20,6 +20,9 @@ class Program
 
         // Section: Meta Binary Search
         RunMetaBinarySearchDemo();
+
+        // Section: Ternary Search
+        RunTernarySearchDemo();
     }
 
     #region Algorithms
@@ -86,7 +89,7 @@ class Program
         Console.WriteLine($"Sentinel Linear Search in Array: Target found at index {arrayResult}");
 
         // Create a list for the demonstration
-        List<int> list = new List<int> { 10, 90, 82, 65, 5, 4, 32, 21, 10, 7 };
+        List<int> list = [10, 90, 82, 65, 5, 4, 32, 21, 10, 7];
 
         // Perform sentinel linear search on the list and display the result
         int listResult = SentinelLinearSearch.Search(list, target);
@@ -109,11 +112,27 @@ class Program
         Console.WriteLine($"Recursive Meta Binary Search: Target found at index {recursiveResult}");
 
         // Create a sorted list for the demonstration
-        List<int> sortedList = new List<int> { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };
+        List<int> sortedList = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
 
         // Perform bitwise meta binary search and display the result
         int bitwiseResult = MetaBinarySearch.BitwiseSearch(sortedList, target);
         Console.WriteLine($"Bitwise Meta Binary Search: Target found at index {bitwiseResult}");
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Ternary Search algorithms.
+    /// </summary>
+    private static void RunTernarySearchDemo()
+    {
+        // Create a sorted array for the demonstration
+        int[] sortedArray = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+
+        // Define the target value to search for
+        const int target = 13;
+
+        // Perform ternary search and display the result
+        int result = TernarySearch.Search(sortedArray, target);
+        Console.WriteLine($"Ternary Search: Target found at index {result}");
     }
 
     #endregion

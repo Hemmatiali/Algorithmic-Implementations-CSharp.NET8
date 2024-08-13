@@ -10,6 +10,7 @@ Searching algorithms are fundamental techniques used in computer science to retr
 - [Linear Search](#linear-search)
 - [Sentinel Linear Search](#sentinel-linear-search)
 - [Meta Binary Search](#meta-binary-search)
+- [Ternary Search](#ternary-search)
 
 ## Binary Search
 
@@ -246,3 +247,63 @@ The advantage of Meta Binary Search over binary search is that it can perform fe
 ### Implementation in C#.NET 8
 
 You can see the implementation of Meta Binary Search in C# in code written in the `MetaBinarySearch.cs` class.
+
+
+## Ternary Search
+
+### Description
+
+Ternary Search is a divide-and-conquer search algorithm that splits the search space into three parts, rather than the two parts used in binary search. It is applied to a sorted array and works by recursively determining which third of the array contains the target element.
+
+### Performance
+
+- **Time Complexity**: O(2 * log3 n)
+- **Space Complexity**: 
+  - Recursive Approach: O(log3 n) due to the stack space used by recursion.
+
+
+The time complexity is slightly better than binary search theoretically, but in practice, binary search often outperforms ternary search due to fewer comparisons and simpler implementation.
+
+### How It Works
+
+1. **Initial Setup**: Start with two pointers, `left` and `right`, representing the current range of elements being searched.
+2. **Calculate Midpoints**:
+   - Calculate two midpoints: `mid1` and `mid2`, which divide the range into three equal parts.
+   - `mid1` is at one-third of the way between `left` and `right`.
+   - `mid2` is at two-thirds of the way between `left` and `right`.
+3. **Comparison**:
+   - If the target value equals the element at `mid1`, the search is successful, and the index `mid1` is returned.
+   - If the target value equals the element at `mid2`, the search is successful, and the index `mid2` is returned.
+   - If the target value is less than the element at `mid1`, repeat the process in the left third.
+   - If the target value is greater than the element at `mid2`, repeat the process in the right third.
+   - Otherwise, repeat the process in the middle third.
+4. **Repeat**: Continue the process recursively until the target is found or the range becomes invalid.
+
+### Steps and Example
+
+Let's consider an example where we search for the value 9 in a sorted array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19].
+
+1. Initial array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+   - Calculate mid1 and mid2:
+     - mid1 = (0 + 9) / 3 = 3 (index), value = 7
+     - mid2 = 2 * (0 + 9) / 3 = 6 (index), value = 13
+   - 9 > 7 and 9 < 13: Search the middle third.
+2. New search range: [5, 7, 9, 11, 13] (indices 3 to 6)
+   - Calculate mid1 and mid2:
+     - mid1 = (3 + 6) / 3 = 4 (index), value = 9
+     - mid2 = 2 * (3 + 6) / 3 = 5 (index), value = 11
+   - 9 == 9: Target found at index 4.
+
+### Advantages
+
+- **Efficiency**: Ternary search theoretically has a better time complexity than binary search but is more complex.
+- **Divide-and-Conquer**: It further divides the search space, which can be useful in specific applications where such division is beneficial.
+
+### Limitations
+
+- **Practical Performance**: Despite its theoretical advantages, binary search usually outperforms ternary search in practice due to fewer comparisons and overhead.
+- **Complexity**: Ternary search is more complex to implement and understand compared to binary search.
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Ternary Search in C# in code written in the `TernarySearch.cs` class.
