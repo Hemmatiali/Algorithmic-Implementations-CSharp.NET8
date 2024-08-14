@@ -11,6 +11,7 @@ Searching algorithms are fundamental techniques used in computer science to retr
 - [Sentinel Linear Search](#sentinel-linear-search)
 - [Meta Binary Search](#meta-binary-search)
 - [Ternary Search](#ternary-search)
+- [Jump Search](#jump-search)
 
 ## Binary Search
 
@@ -307,3 +308,53 @@ Let's consider an example where we search for the value 9 in a sorted array: [1,
 ### Implementation in C#.NET 8
 
 You can see the implementation of Ternary Search in C# in code written in the `TernarySearch.cs` class.
+
+
+## Jump Search
+
+### Description
+
+Jump Search is an efficient search algorithm designed for ordered lists. It works by dividing the list into blocks of a fixed size and jumping ahead by these block sizes to find a block that contains the target value. Once the appropriate block is found, a linear search is performed within that block.
+
+### Performance
+
+- **Time Complexity**: O(√n)
+- **Space Complexity**: O(1)
+
+Jump Search provides a middle ground between linear search and binary search, offering better performance than linear search with a lower complexity than binary search, making it ideal for large sorted datasets.
+
+### How It Works
+
+1. **Initial Setup**: Calculate the optimal block size, typically the square root of the array length.
+2. **Jumping**:
+   - Start at the beginning of the array and jump ahead by the block size until you find a block where the target might be present.
+3. **Linear Search**:
+   - Once the correct block is identified, perform a linear search within the block to locate the target.
+4. **Return the Result**: If the target is found, return its index; otherwise, return -1.
+
+### Steps and Example
+
+Let's consider an example where we search for the value 15 in a sorted array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19].
+
+1. Initial array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+   - Calculate the optimal block size: √10 ≈ 3.
+2. Start at index 0:
+   - Value = 1, not 15. Jump to index 3.
+   - Value = 7, not 15. Jump to index 6.
+   - Value = 13, not 15. Jump to index 9.
+3. Since 13 < 15 < 19, perform a linear search between indices 7 and 9.
+   - Value at index 7 = 15. Target found at index 7.
+
+### Advantages
+
+- **Efficiency**: Faster than linear search, especially for large datasets, while simpler than binary search.
+- **Simplicity**: Easy to implement and understand, making it a good choice when a binary search is not necessary.
+
+### Limitations
+
+- **Sorted Data**: Jump Search can only be applied to a sorted list of elements.
+- **Optimal Jump Size**: The efficiency of Jump Search relies on choosing an appropriate block size, which is generally the square root of the array length.
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Jump Search in C# in code written in the `JumpSearch.cs` class.

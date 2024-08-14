@@ -23,6 +23,9 @@ class Program
 
         // Section: Ternary Search
         RunTernarySearchDemo();
+
+        // Section: Jump Search
+        RunJumpSearchDemo();
     }
 
     #region Algorithms
@@ -133,6 +136,22 @@ class Program
         // Perform ternary search and display the result
         int result = TernarySearch.Search(sortedArray, target);
         Console.WriteLine($"Ternary Search: Target found at index {result}");
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Jump Search algorithms.
+    /// </summary>
+    private static void RunJumpSearchDemo()
+    {
+        // Create a sorted array for the demonstration
+        int[] sortedArray = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };
+
+        // Define the target value to search for
+        const int target = 15;
+
+        // Perform jump search and display the result
+        int result = JumpSearch.Search(sortedArray, target);
+        Console.WriteLine($"Jump Search: Target found at index {result}");
     }
 
     #endregion
