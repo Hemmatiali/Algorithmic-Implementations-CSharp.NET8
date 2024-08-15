@@ -12,6 +12,7 @@ Searching algorithms are fundamental techniques used in computer science to retr
 - [Meta Binary Search](#meta-binary-search)
 - [Ternary Search](#ternary-search)
 - [Jump Search](#jump-search)
+- [Interpolation Search](#interpolation-search)
 
 ## Binary Search
 
@@ -358,3 +359,54 @@ Let's consider an example where we search for the value 15 in a sorted array: [1
 ### Implementation in C#.NET 8
 
 You can see the implementation of Jump Search in C# in code written in the `JumpSearch.cs` class.
+
+
+## Interpolation Search
+
+### Description
+
+Interpolation Search is an advanced search algorithm for finding an element in a sorted array. It improves on binary search by estimating the likely position of the target based on the value of the target relative to the values at the current bounds. This makes it particularly effective for searching in uniformly distributed datasets.
+
+### Performance
+
+- **Best-Case Time Complexity**: O(log2(log2 n)) — This occurs when the data is uniformly distributed.
+- **Worst-Case Time Complexity**: O(n) — This occurs when the data is non-uniformly distributed or the distribution is skewed.
+- **Space Complexity**: O(1) — The algorithm requires a constant amount of additional space.
+
+Interpolation Search can outperform binary search in the best case because it uses a more accurate guess about where the target might be, reducing the number of comparisons needed. However, in the worst case, particularly with non-uniformly distributed data, its performance can degrade to linear time.
+
+### How It Works
+
+1. **Initial Setup**: Start with two pointers, `low` and `high`, representing the current search bounds of the array.
+2. **Position Calculation**: Estimate the position of the target using the interpolation formula:
+   - `pos = low + ((target - array[low]) * (high - low)) / (array[high] - array[low]);`
+   - This formula calculates the likely position of the target based on its value relative to the values at the `low` and `high` indices.
+3. **Comparison**:
+   - If the target is found at the estimated position, return the index.
+   - If the target is greater than the element at `pos`, move the `low` pointer to `pos + 1` and continue the search in the upper part of the array.
+   - If the target is less than the element at `pos`, move the `high` pointer to `pos - 1` and continue the search in the lower part of the array.
+4. **Repeat**: Continue the process until the target is found or the search range becomes invalid.
+
+### Steps and Example
+
+Let's consider an example where we search for the value 15 in a uniformly distributed sorted array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19].
+
+1. Initial array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+   - Set `low = 0` and `high = 9`.
+   - Calculate `pos` using the interpolation formula.
+   - Position calculation: `pos = 0 + ((15 - 1) * (9 - 0)) / (19 - 1) = 7`.
+   - Check `array[pos]`, which is 15. Target found at index 7.
+
+### Advantages
+
+- **Efficiency**: In the best case, Interpolation Search can be much faster than binary search due to its more accurate guess of the target's position.
+- **Simplicity**: The algorithm is straightforward to implement and provides an interesting alternative to binary search for uniformly distributed data.
+
+### Limitations
+
+- **Data Distribution**: Interpolation Search is most effective with uniformly distributed data. If the data is skewed or non-uniform, the performance can degrade significantly.
+- **Worst-Case Performance**: In cases where the data is not uniformly distributed, the time complexity can degrade to O(n), making it less efficient than binary search.
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Interpolation Search in C# in code written in the `InterpolationSearch.cs` class.

@@ -26,6 +26,9 @@ class Program
 
         // Section: Jump Search
         RunJumpSearchDemo();
+
+        // Section: Interpolation Search
+        RunInterpolationSearchDemo();
     }
 
     #region Algorithms
@@ -153,6 +156,23 @@ class Program
         int result = JumpSearch.Search(sortedArray, target);
         Console.WriteLine($"Jump Search: Target found at index {result}");
     }
+
+    /// <summary>
+    ///     Demonstrates the usage of Interpolation Search algorithms.
+    /// </summary>
+    private static void RunInterpolationSearchDemo()
+    {
+        // Create a sorted array for the demonstration
+        int[] sortedArray = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+
+        // Define the target value to search for
+        const int target = 15;
+
+        // Perform interpolation search and display the result
+        int result = InterpolationSearch.Search(sortedArray, target);
+        Console.WriteLine($"Interpolation Search: Target found at index {result}");
+    }
+
 
     #endregion
 
