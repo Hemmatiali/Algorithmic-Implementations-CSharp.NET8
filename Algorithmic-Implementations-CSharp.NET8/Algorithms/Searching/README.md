@@ -13,6 +13,7 @@ Searching algorithms are fundamental techniques used in computer science to retr
 - [Ternary Search](#ternary-search)
 - [Jump Search](#jump-search)
 - [Interpolation Search](#interpolation-search)
+- [Exponential Search](#exponential-search)
 
 ## Binary Search
 
@@ -410,3 +411,57 @@ Let's consider an example where we search for the value 15 in a uniformly distri
 ### Implementation in C#.NET 8
 
 You can see the implementation of Interpolation Search in C# in code written in the `InterpolationSearch.cs` class.
+
+
+## Exponential Search
+
+### Description
+
+Exponential Search is an advanced search algorithm designed for sorted arrays. It works by quickly finding a range where the target value may reside using exponential jumps, followed by a binary search within that range. This makes it particularly effective for large datasets, especially when the target is near the beginning of the array.
+
+### Performance
+
+- **Time Complexity**: 
+  - **Best-Case**: O(log n) — This occurs when the target is near the beginning of the array.
+  - **Average-Case**: O(log n) — Similar to binary search in most cases, as binary search is performed on a subset of the array.
+  - **Worst-Case**: O(log n) — This occurs when the target is near the end of the array, as it requires more jumps and binary search over a larger range.
+- **Space Complexity**: O(1) — The algorithm requires a constant amount of additional space.
+
+Exponential Search combines the efficiency of binary search with a fast initial range determination, making it particularly useful for large, sorted datasets.
+
+### How It Works
+
+1. **Initial Setup**: Start by checking if the target is the first element.
+2. **Exponential Range Finding**:
+   - Begin with a range of size 1 and exponentially increase the range by doubling the index (`i = 1, 2, 4, 8, ...`) until the value at the current index exceeds the target or the end of the array is reached.
+3. **Binary Search**:
+   - Once the range is determined, perform a binary search within that range to find the exact position of the target.
+4. **Return the Result**: If the target is found, return its index; otherwise, return -1.
+
+### Steps and Example
+
+Let's consider an example where we search for the value 15 in a sorted array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19].
+
+1. Initial array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+   - Start with `i = 1`.
+   - Continue doubling the index until `array[i]` exceeds the target:
+     - `i = 1` → array[1] = 3
+     - `i = 2` → array[2] = 5
+     - `i = 4` → array[4] = 9
+     - `i = 8` → array[8] = 17 (stop here, since 17 > 15)
+   - Perform binary search in the range [4, 8].
+   - Binary search finds the target at index 7.
+
+### Advantages
+
+- **Efficiency**: Exponential Search is particularly fast when the target is near the beginning of the array.
+- **Combines Techniques**: By combining exponential jumps with binary search, the algorithm effectively narrows down the search space quickly and efficiently.
+
+### Limitations
+
+- **Sorted Data**: Exponential Search can only be applied to a sorted list of elements.
+- **Large Gaps**: If there are large gaps in the array, the initial exponential jumps might overshoot, requiring a broader binary search.
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Exponential Search in C# in code written in the `ExponentialSearch.cs` class. The implementation includes both a basic and an iterative version of the algorithm.

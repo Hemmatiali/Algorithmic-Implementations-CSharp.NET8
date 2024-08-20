@@ -29,6 +29,9 @@ class Program
 
         // Section: Interpolation Search
         RunInterpolationSearchDemo();
+
+        // Section: Exponential Search
+        RunExponentialSearchDemo();
     }
 
     #region Algorithms
@@ -173,6 +176,25 @@ class Program
         Console.WriteLine($"Interpolation Search: Target found at index {result}");
     }
 
+    /// <summary>
+    ///     Demonstrates the usage of Exponential Search algorithms.
+    /// </summary>
+    private static void RunExponentialSearchDemo()
+    {
+        // Create a sorted array for the demonstration
+        int[] sortedArray = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+
+        // Define the target value to search for
+        const int target = 15;
+
+        // Perform basic exponential search and display the result
+        int basicResult = ExponentialSearch.BasicSearch(sortedArray, target);
+        Console.WriteLine($"Basic Exponential Search: Target found at index {basicResult}");
+
+        // Perform iterative exponential search and display the result
+        int iterativeResult = ExponentialSearch.IterativeSearch(sortedArray, target);
+        Console.WriteLine($"Iterative Exponential Search: Target found at index {iterativeResult}");
+    }
 
     #endregion
 
