@@ -14,6 +14,7 @@ Searching algorithms are fundamental techniques used in computer science to retr
 - [Jump Search](#jump-search)
 - [Interpolation Search](#interpolation-search)
 - [Exponential Search](#exponential-search)
+- [Fibonacci Search](#fibonacci-search)
 
 ## Binary Search
 
@@ -465,3 +466,53 @@ Let's consider an example where we search for the value 15 in a sorted array: [1
 ### Implementation in C#.NET 8
 
 You can see the implementation of Exponential Search in C# in code written in the `ExponentialSearch.cs` class. The implementation includes both a basic and an iterative version of the algorithm.
+
+
+## Fibonacci Search
+
+### Description
+
+Fibonacci Search is an advanced search algorithm that uses Fibonacci numbers to divide the search space into smaller parts, similar to binary search. The key difference is that Fibonacci Search uses the Fibonacci sequence to calculate the index at which the array should be split, which can offer better performance in some scenarios, particularly for larger datasets.
+
+### Performance
+
+- **Time Complexity**: O(log n) — The time complexity is similar to that of binary search, as the search space is repeatedly divided.
+- **Space Complexity**: O(1) — The algorithm requires only a constant amount of additional space.
+
+Fibonacci Search is particularly effective for searching in sorted arrays, and while it generally performs similarly to binary search, its use of Fibonacci numbers can make it more efficient in certain situations.
+
+### How It Works
+
+1. **Fibonacci Initialization**: Initialize the Fibonacci numbers `fibMm2` (m-2), `fibMm1` (m-1), and `fibM` (m) such that `fibM` is the smallest Fibonacci number greater than or equal to the length of the array.
+2. **Range Elimination**:
+   - Compare the target value with the element at the Fibonacci index.
+   - Depending on the comparison, adjust the Fibonacci numbers and update the offset to narrow down the search range.
+3. **Final Comparison**: After narrowing down the search range, make a final comparison to determine if the target value is present.
+4. **Return the Result**: If the target is found, return its index; otherwise, return -1.
+
+### Steps and Example
+
+Let's consider an example where we search for the value 15 in a sorted array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19].
+
+1. Initial array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+   - Initialize Fibonacci numbers: `fibMm2 = 0`, `fibMm1 = 1`, `fibM = 1`.
+   - Update Fibonacci numbers until `fibM >= n`:
+     - `fibMm2 = 1`, `fibMm1 = 1`, `fibM = 2`
+     - `fibMm2 = 1`, `fibMm1 = 2`, `fibM = 3`
+     - Continue updating until `fibM = 13`.
+   - Compare the target value with the element at the Fibonacci index.
+   - Narrow down the search range and repeat until the target is found at index 7.
+
+### Advantages
+
+- **Efficiency**: Fibonacci Search can be more efficient than binary search in certain scenarios, particularly when the data distribution favors the Fibonacci sequence.
+- **Simple Implementation**: The algorithm is straightforward to implement and requires minimal additional space.
+
+### Limitations
+
+- **Sorted Data**: Like binary search, Fibonacci Search can only be applied to sorted arrays.
+- **Performance Variability**: While Fibonacci Search can outperform binary search in some cases, it is generally comparable in performance and may not always offer a significant advantage.
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Fibonacci Search in C# in code written in the `FibonacciSearch.cs` class.

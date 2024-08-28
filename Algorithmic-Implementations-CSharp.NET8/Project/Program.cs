@@ -32,6 +32,9 @@ class Program
 
         // Section: Exponential Search
         RunExponentialSearchDemo();
+
+        // Section: Fibonacci Search
+        RunFibonacciSearchDemo();
     }
 
     #region Algorithms
@@ -57,7 +60,6 @@ class Program
         int recursiveResult = BinarySearch.Recursive(sortedArray, target, 0, sortedArray.Length - 1);
         Console.WriteLine($"Recursive Binary Search: Target found at index {recursiveResult}");
     }
-
 
     /// <summary>
     ///     Demonstrates the usage of linear search algorithms.
@@ -194,6 +196,22 @@ class Program
         // Perform iterative exponential search and display the result
         int iterativeResult = ExponentialSearch.IterativeSearch(sortedArray, target);
         Console.WriteLine($"Iterative Exponential Search: Target found at index {iterativeResult}");
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Fibonacci Search algorithms.
+    /// </summary>
+    private static void RunFibonacciSearchDemo()
+    {
+        // Create a sorted array for the demonstration
+        int[] sortedArray = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+
+        // Define the target value to search for
+        const int target = 15;
+
+        // Perform Fibonacci search and display the result
+        int result = FibonacciSearch.Search(sortedArray, target);
+        Console.WriteLine($"Fibonacci Search: Target found at index {result}");
     }
 
     #endregion
