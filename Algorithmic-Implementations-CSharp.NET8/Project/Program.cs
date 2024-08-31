@@ -35,6 +35,10 @@ class Program
 
         // Section: Fibonacci Search
         RunFibonacciSearchDemo();
+
+        // Section: Ubiquitous Binary Search
+        RunUbiquitousBinarySearchDemo();
+
     }
 
     #region Algorithms
@@ -90,7 +94,7 @@ class Program
     private static void RunSentinelLinearSearchDemo()
     {
         // Create an array for the demonstration
-        int[] array = { 10, 90, 82, 7, 65, 5, 4, 32, 21, 10 };
+        int[] array = [10, 90, 82, 7, 65, 5, 4, 32, 21, 10];
 
         // Define the target value to search for
         const int target = 7;
@@ -113,7 +117,7 @@ class Program
     private static void RunMetaBinarySearchDemo()
     {
         // Create a sorted array for the demonstration
-        int[] sortedArray = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };
+        int[] sortedArray = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
 
         // Define the target value to search for
         const int target = 15;
@@ -152,7 +156,7 @@ class Program
     private static void RunJumpSearchDemo()
     {
         // Create a sorted array for the demonstration
-        int[] sortedArray = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };
+        int[] sortedArray = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
 
         // Define the target value to search for
         const int target = 15;
@@ -212,6 +216,30 @@ class Program
         // Perform Fibonacci search and display the result
         int result = FibonacciSearch.Search(sortedArray, target);
         Console.WriteLine($"Fibonacci Search: Target found at index {result}");
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Ubiquitous Binary Search algorithms.
+    /// </summary>
+    private static void RunUbiquitousBinarySearchDemo()
+    {
+        // Create a sorted array for the demonstration
+        int[] sortedArray = [1, 2, 2, 2, 3, 4, 4, 5, 6, 7];
+
+        // Define the target value to search for
+        const int target = 2;
+
+        // Perform Ubiquitous Binary Search to find the first occurrence and display the result
+        int firstOccurrence = UbiquitousBinarySearch.FindFirst(sortedArray, target);
+        Console.WriteLine($"UbiquitousBinarySearch: First occurrence of {target}: {firstOccurrence}");
+
+        // Perform Ubiquitous Binary Search to find the last occurrence and display the result
+        int lastOccurrence = UbiquitousBinarySearch.FindLast(sortedArray, target);
+        Console.WriteLine($"UbiquitousBinarySearch: Last occurrence of {target}: {lastOccurrence}");
+
+        // Perform Ubiquitous Binary Search to count the occurrences and display the result
+        int occurrenceCount = UbiquitousBinarySearch.CountOccurrences(sortedArray, target);
+        Console.WriteLine($"UbiquitousBinarySearch: {target} appears {occurrenceCount} times in the array");
     }
 
     #endregion

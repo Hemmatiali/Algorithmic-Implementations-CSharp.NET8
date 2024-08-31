@@ -15,6 +15,7 @@ Searching algorithms are fundamental techniques used in computer science to retr
 - [Interpolation Search](#interpolation-search)
 - [Exponential Search](#exponential-search)
 - [Fibonacci Search](#fibonacci-search)
+- [Ubiquitous Binary Search](#ubiquitous-binary-search)
 
 ## Binary Search
 
@@ -516,3 +517,59 @@ Let's consider an example where we search for the value 15 in a sorted array: [1
 ### Implementation in C#.NET 8
 
 You can see the implementation of Fibonacci Search in C# in code written in the `FibonacciSearch.cs` class.
+
+
+## Ubiquitous Binary Search
+
+### Description
+
+Ubiquitous Binary Search is an extension of the traditional binary search algorithm. It is designed to handle scenarios where multiple occurrences of a target value exist within a sorted array. This search algorithm allows you to efficiently find the first and last occurrences of the target value, as well as count the number of times the target appears in the array.
+
+### Performance
+
+- **Time Complexity**: O(log n) — The time complexity for finding the first and last occurrences, as well as counting occurrences, remains logarithmic.
+- **Space Complexity**: O(1) — The algorithm requires only a constant amount of additional space.
+
+Ubiquitous Binary Search maintains the efficiency of binary search while extending its functionality to handle multiple occurrences of the target value.
+
+### How It Works
+
+1. **FindFirst Method**:
+   - Perform a binary search to locate the target value.
+   - If the target is found, continue searching in the left half to ensure the first occurrence is found.
+   
+2. **FindLast Method**:
+   - Perform a binary search to locate the target value.
+   - If the target is found, continue searching in the right half to ensure the last occurrence is found.
+   
+3. **CountOccurrences Method**:
+   - Utilize `FindFirst` to determine the index of the first occurrence.
+   - Utilize `FindLast` to determine the index of the last occurrence.
+   - Calculate the number of occurrences by subtracting the first index from the last index and adding one.
+
+### Steps and Example
+
+Let's consider an example where we search for the value 2 in a sorted array: [1, 2, 2, 2, 3, 4, 4, 5, 6, 7].
+
+1. **First Occurrence**:
+   - Perform binary search to find the first occurrence of 2, which is at index 1.
+   
+2. **Last Occurrence**:
+   - Perform binary search to find the last occurrence of 2, which is at index 3.
+   
+3. **Count Occurrences**:
+   - The number of occurrences of 2 is calculated as `3 - 1 + 1 = 3`.
+
+### Advantages
+
+- **Efficiency**: Ubiquitous Binary Search extends the functionality of binary search while maintaining its O(log n) time complexity.
+- **Multiple Occurrences**: The algorithm is particularly useful for finding all occurrences of a target value in a sorted array.
+
+### Limitations
+
+- **Sorted Data**: Ubiquitous Binary Search can only be applied to sorted arrays.
+- **Specific Use Case**: While useful, this algorithm is most beneficial in scenarios where multiple occurrences of the target value are expected.
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Ubiquitous Binary Search in C# in code written in the `UbiquitousBinarySearch.cs` class. This implementation includes methods for finding the first and last occurrences of a target value, as well as counting the total occurrences of the value in a sorted array.

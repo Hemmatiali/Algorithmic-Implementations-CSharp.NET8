@@ -49,7 +49,7 @@ public class TernarySearchTests
     public void Search_EmptyArray_ReturnsMinusOne()
     {
         // Arrange
-        int[] emptyArray = new int[0];
+        int[] emptyArray = [];
         int target = 10;
 
         // Act
@@ -66,7 +66,7 @@ public class TernarySearchTests
     public void Search_SingleElementArray_ReturnsCorrectIndex()
     {
         // Arrange
-        int[] singleElementArray = new int[] { 15 };
+        int[] singleElementArray = [15];
         int target = 15;
         int expectedIndex = 0;
 

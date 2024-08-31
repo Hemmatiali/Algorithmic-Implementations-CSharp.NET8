@@ -84,7 +84,7 @@ public class ExponentialSearchTests
     public void BasicSearch_EmptyArray_ReturnsMinusOne()
     {
         // Arrange
-        int[] emptyArray = new int[0];
+        int[] emptyArray = [];
         int target = 10;
 
         // Act
@@ -101,7 +101,7 @@ public class ExponentialSearchTests
     public void IterativeSearch_EmptyArray_ReturnsMinusOne()
     {
         // Arrange
-        int[] emptyArray = new int[0];
+        int[] emptyArray = [];
         int target = 10;
 
         // Act
@@ -118,7 +118,7 @@ public class ExponentialSearchTests
     public void BasicSearch_SingleElementArray_ReturnsCorrectIndex()
     {
         // Arrange
-        int[] singleElementArray = new int[] { 15 };
+        int[] singleElementArray = [15];
         int target = 15;
         int expectedIndex = 0;
 
@@ -136,7 +136,7 @@ public class ExponentialSearchTests
     public void IterativeSearch_SingleElementArray_ReturnsCorrectIndex()
     {
         // Arrange
-        int[] singleElementArray = new int[] { 15 };
+        int[] singleElementArray = [15];
         int target = 15;
         int expectedIndex = 0;
 

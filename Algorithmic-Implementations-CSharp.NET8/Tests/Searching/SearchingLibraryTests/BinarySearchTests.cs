@@ -65,7 +65,7 @@ public class BinarySearchTests
     public void Search_EmptyArray_ReturnsMinusOne()
     {
         // Arrange
-        int[] emptyArray = new int[0];
+        int[] emptyArray = [];
         int target = 1;
 
         // Act & Assert
@@ -80,7 +80,7 @@ public class BinarySearchTests
     public void Search_SingleElementArray_ReturnsCorrectIndex()
     {
         // Arrange
-        int[] singleElementArray = new int[] { 5 };
+        int[] singleElementArray = [5];
         int target = 5;
         int expectedIndex = 0;
 
