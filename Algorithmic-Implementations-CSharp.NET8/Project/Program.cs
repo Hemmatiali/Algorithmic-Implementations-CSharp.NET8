@@ -1,4 +1,5 @@
 ﻿using SearchingLibrary;
+using SortingLibrary;
 
 namespace Project;
 
@@ -39,6 +40,8 @@ class Program
         // Section: Ubiquitous Binary Search
         RunUbiquitousBinarySearchDemo();
 
+        // Section: Selection Sort
+        RunSelectionSortDemo();
     }
 
     #region Algorithms
@@ -244,6 +247,40 @@ class Program
 
     #endregion
 
+    #region Sorting Algorithms
+
+    /// <summary>
+    ///     Demonstrates the usage of Selection Sort algorithm.
+    /// </summary>
+    private static void RunSelectionSortDemo()
+    {
+        // Create an unsorted array for the demonstration
+        int[] array = [64, 25, 12, 22, 11];
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Selection Sort and display the result
+        SelectionSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Selection Sort:");
+        PrintArray(array);
+    }
+
+    /// <summary>
+    ///     Prints the elements of an array.
+    /// </summary>
+    /// <param name="array">The array to be printed.</param>
+    private static void PrintArray(int[] array)
+    {
+        foreach (var item in array)
+        {
+            Console.Write(item + " ");
+        }
+        Console.WriteLine();
+    }
+
     #endregion
 
+    #endregion
 }

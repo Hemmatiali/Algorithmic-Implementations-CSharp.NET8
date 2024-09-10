@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Algorithms\Searching\SearchingLibrary\SearchingLibrary.csproj" />
+    <ProjectReference Include="..\Algorithms\Sorting\SortingLibrary\SortingLibrary.csproj" />
   </ItemGroup>
 
 </Project>
