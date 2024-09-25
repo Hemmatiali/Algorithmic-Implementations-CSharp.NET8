@@ -45,6 +45,9 @@ class Program
 
         // Section: Bubble Sort
         RunBubbleSortDemo();
+
+        // Section: Recursive Bubble Sort
+        RunRecursiveBubbleSortDemo();
     }
 
     #region Algorithms
@@ -285,6 +288,24 @@ class Program
         BubbleSort.Sort(array);
 
         Console.WriteLine("Sorted array using Bubble Sort:");
+        PrintArray(array);
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Recursive Bubble Sort algorithm.
+    /// </summary>
+    private static void RunRecursiveBubbleSortDemo()
+    {
+        // Create an unsorted array for the demonstration
+        int[] array = [64, 34, 25, 12, 22, 11, 90];
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Recursive Bubble Sort and display the result
+        RecursiveBubbleSort.Sort(array, array.Length);
+
+        Console.WriteLine("Sorted array using Recursive Bubble Sort:");
         PrintArray(array);
     }
 

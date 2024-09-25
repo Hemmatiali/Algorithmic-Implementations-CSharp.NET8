@@ -107,3 +107,49 @@ Let's consider an example where we sort the following array: [64, 34, 25, 12, 22
 ### Implementation in C#.NET 8
 
 You can see the implementation of Bubble Sort in C# in the `BubbleSort.cs` class. The algorithm uses an optimized version of Bubble Sort that terminates early if no swaps are made during a pass.
+
+
+## Recursive Bubble Sort
+
+### Description
+
+Recursive Bubble Sort is a variation of the Bubble Sort algorithm that uses recursion instead of iteration. The logic behind the sorting process remains the same: the largest element "bubbles" up to the correct position in each pass, and the function is recursively called to sort the rest of the array.
+
+### Performance
+
+- **Time Complexity**: O(n^2) in the best, average, and worst cases (same as iterative bubble sort)
+- **Space Complexity**: O(n) (due to the recursive call stack)
+- **Stability**: Recursive Bubble Sort is stable, meaning it preserves the relative order of equal elements.
+- **In-Place**: Yes
+
+### How It Works
+
+1. **Base Case**: The recursion stops when the array has only one element or no elements.
+2. **One Pass**: The function goes through the unsorted portion of the array, performing one pass of bubble sort by comparing and swapping adjacent elements.
+3. **Recursive Call**: After each pass, the largest element is placed in its correct position, and the function calls itself recursively to sort the remaining unsorted portion of the array.
+
+### Steps and Example
+
+Let's consider an example where we sort the following array: [64, 34, 25, 12, 22, 11, 90].
+
+1. Initial array: [64, 34, 25, 12, 22, 11, 90]
+   - Compare 64 and 34 → swap → New array: [34, 64, 25, 12, 22, 11, 90]
+   - Continue this process until the largest element "90" is placed at the end.
+
+2. Recursive call for the remaining array:
+   - Recursive pass: Sort the first n-1 elements.
+   - Continue sorting the array recursively until the base case is reached.
+
+### Advantages
+
+- **Simple to Implement**: Recursive Bubble Sort is easy to implement and understand, similar to the iterative version.
+- **Good for Teaching**: It's a useful example for understanding recursion.
+
+### Limitations
+
+- **Inefficient for Large Arrays**: Recursive Bubble Sort, like iterative bubble sort, has a time complexity of O(n^2), making it inefficient for large datasets.
+- **Memory Usage**: The recursive approach uses O(n) space due to the recursive call stack, making it less memory-efficient compared to the iterative version.
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Recursive Bubble Sort in C# in the `RecursiveBubbleSort.cs` class. The algorithm uses recursion to sort the array by calling the `Sort` method with progressively smaller subarrays.
