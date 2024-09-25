@@ -55,3 +55,55 @@ Let's consider an example where we sort the following array: [64, 25, 12, 22, 11
 
 You can see the implementation of Selection Sort in C# in the `SelectionSort.cs` class. The algorithm is implemented using the in-place approach with a helper method for swapping elements.
 
+
+## Bubble Sort
+
+### Description
+
+Bubble Sort is one of the simplest sorting algorithms. It works by repeatedly stepping through the list, comparing adjacent elements, and swapping them if they are in the wrong order. The algorithm gets its name because the largest elements "bubble up" to the end of the array after each pass. The process repeats until the array is sorted.
+
+### Performance
+
+- **Time Complexity**:
+  - **Best Case**: O(n) (when the array is already sorted)
+  - **Average Case**: O(n^2)
+  - **Worst Case**: O(n^2)
+- **Space Complexity**: O(1) (in-place sorting)
+- **Stability**: Bubble Sort is a stable sorting algorithm, meaning it preserves the relative order of equal elements.
+- **In-Place**: Yes
+
+### How It Works
+
+1. **Initial Setup**: The algorithm compares each pair of adjacent elements.
+2. **Swapping**: If the element on the left is larger than the one on the right, they are swapped.
+3. **Repeat**: After each pass, the largest unsorted element moves to its correct position.
+4. **Optimization**: If no swaps are made in a pass, the array is already sorted, and the algorithm terminates early.
+
+### Steps and Example
+
+Let's consider an example where we sort the following array: [64, 34, 25, 12, 22, 11, 90].
+
+1. Initial array: [64, 34, 25, 12, 22, 11, 90]
+   - Compare 64 and 34 → swap → New array: [34, 64, 25, 12, 22, 11, 90]
+   - Compare 64 and 25 → swap → New array: [34, 25, 64, 12, 22, 11, 90]
+   - Continue this process until the end of the array.
+
+2. After the first pass, the largest element (90) will be in its correct position:
+   - New array: [34, 25, 12, 22, 11, 64, 90]
+
+3. The process repeats until the entire array is sorted.
+
+### Advantages
+
+- **Simple to Implement**: Bubble Sort is one of the simplest sorting algorithms to implement and understand.
+- **Stable Sorting**: Since it preserves the relative order of equal elements, it is a stable sorting algorithm.
+- **Good for Small Datasets**: Although it is not efficient for large datasets, it works well for small datasets and when the array is nearly sorted.
+
+### Limitations
+
+- **Inefficient for Large Arrays**: Bubble Sort has a time complexity of O(n^2), making it impractical for large datasets.
+- **Slow**: It is slower compared to other algorithms such as Quick Sort or Merge Sort, especially for large datasets.
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Bubble Sort in C# in the `BubbleSort.cs` class. The algorithm uses an optimized version of Bubble Sort that terminates early if no swaps are made during a pass.

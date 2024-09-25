@@ -42,6 +42,9 @@ class Program
 
         // Section: Selection Sort
         RunSelectionSortDemo();
+
+        // Section: Bubble Sort
+        RunBubbleSortDemo();
     }
 
     #region Algorithms
@@ -264,6 +267,24 @@ class Program
         SelectionSort.Sort(array);
 
         Console.WriteLine("Sorted array using Selection Sort:");
+        PrintArray(array);
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Bubble Sort algorithm.
+    /// </summary>
+    private static void RunBubbleSortDemo()
+    {
+        // Create an unsorted array for the demonstration
+        int[] array = [64, 34, 25, 12, 22, 11, 90];
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Bubble Sort and display the result
+        BubbleSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Bubble Sort:");
         PrintArray(array);
     }
 
