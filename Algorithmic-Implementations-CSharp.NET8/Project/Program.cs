@@ -48,6 +48,9 @@ class Program
 
         // Section: Recursive Bubble Sort
         RunRecursiveBubbleSortDemo();
+
+        // Section: Insertion Sort
+        RunInsertionSortDemo();
     }
 
     #region Algorithms
@@ -306,6 +309,24 @@ class Program
         RecursiveBubbleSort.Sort(array, array.Length);
 
         Console.WriteLine("Sorted array using Recursive Bubble Sort:");
+        PrintArray(array);
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Insertion Sort algorithm.
+    /// </summary>
+    private static void RunInsertionSortDemo()
+    {
+        // Create an unsorted array for the demonstration
+        int[] array = [12, 11, 13, 5, 6];
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Insertion Sort and display the result
+        InsertionSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Insertion Sort:");
         PrintArray(array);
     }
 

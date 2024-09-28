@@ -153,3 +153,64 @@ Let's consider an example where we sort the following array: [64, 34, 25, 12, 22
 ### Implementation in C#.NET 8
 
 You can see the implementation of Recursive Bubble Sort in C# in the `RecursiveBubbleSort.cs` class. The algorithm uses recursion to sort the array by calling the `Sort` method with progressively smaller subarrays.
+
+
+
+## Insertion Sort
+
+### Description
+
+Insertion Sort is a simple and intuitive comparison-based sorting algorithm. It works similarly to the way we sort playing cards in our hands. The array is virtually split into two parts: a sorted subarray and an unsorted subarray. Elements from the unsorted subarray are picked one by one and inserted into their correct position in the sorted subarray.
+
+
+### Performance
+
+- **Time Complexity**:
+  - **Best Case**: O(n) (when the array is already sorted)
+  - **Average Case**: O(n^2)
+  - **Worst Case**: O(n^2)
+- **Space Complexity**: O(1) (in-place sorting)
+- **Stability**: Insertion Sort is a stable sorting algorithm, meaning it preserves the relative order of equal elements.
+- **In-Place**: Yes
+
+
+### How It Works
+
+1. **Initial Setup**: The algorithm starts by assuming that the first element is already sorted. Then, it picks each element from the unsorted subarray and compares it with elements in the sorted subarray.
+2. **Shifting**: If an element in the sorted subarray is larger than the picked element, it is shifted one position to the right to make space for the picked element.
+3. **Insertion**: The picked element is inserted into its correct position in the sorted subarray.
+4. **Repeat**: This process is repeated for each element in the unsorted subarray until the entire array is sorted.
+
+### Steps and Example
+
+Let's consider an example where we sort the following array: [12, 11, 13, 5, 6].
+
+1. Initial array: [12, 11, 13, 5, 6]
+   - Start by picking 11, compare with 12 and insert it before 12.
+   - New array: [11, 12, 13, 5, 6]
+
+2. Pick 13 and place it in its correct position:
+   - No shifting needed, array remains: [11, 12, 13, 5, 6]
+
+3. Pick 5, compare with 13, 12, and 11, and insert it at the beginning:
+   - New array: [5, 11, 12, 13, 6]
+
+4. Finally, pick 6, and place it in the correct position between 5 and 11:
+   - New array: [5, 6, 11, 12, 13]
+
+The array is now sorted.
+
+### Advantages
+
+- **Simplicity**: Insertion Sort is easy to implement and understand.
+- **Efficient for Small Arrays**: It works well for small datasets or nearly sorted arrays, where it can be more efficient than more complex algorithms like Quick Sort or Merge Sort.
+- **Online Sorting**: It can sort data as it receives it, making it an online algorithm.
+
+### Limitations
+
+- **Inefficient for Large Arrays**: Insertion Sort has a time complexity of O(n^2), making it inefficient for large datasets.
+- **Shifting Overhead**: As elements need to be shifted to make space for the new element, the overhead can increase for large arrays, particularly when the array is sorted in reverse order.
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Insertion Sort in C# in the `InsertionSort.cs` class. The algorithm is implemented using an in-place approach, meaning it sorts the array without needing extra space for a copy of the array.
