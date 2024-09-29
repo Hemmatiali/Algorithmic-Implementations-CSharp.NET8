@@ -51,6 +51,9 @@ class Program
 
         // Section: Insertion Sort
         RunInsertionSortDemo();
+
+        // Section: Merge Sort
+        RunMergeSortDemo();
     }
 
     #region Algorithms
@@ -327,6 +330,24 @@ class Program
         InsertionSort.Sort(array);
 
         Console.WriteLine("Sorted array using Insertion Sort:");
+        PrintArray(array);
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Merge Sort algorithm.
+    /// </summary>
+    private static void RunMergeSortDemo()
+    {
+        // Create an unsorted array for the demonstration
+        int[] array = [12, 13, 11, 8, 6, 7];
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Merge Sort and display the result
+        MergeSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Merge Sort:");
         PrintArray(array);
     }
 

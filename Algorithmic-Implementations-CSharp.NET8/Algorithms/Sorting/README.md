@@ -214,3 +214,73 @@ The array is now sorted.
 ### Implementation in C#.NET 8
 
 You can see the implementation of Insertion Sort in C# in the `InsertionSort.cs` class. The algorithm is implemented using an in-place approach, meaning it sorts the array without needing extra space for a copy of the array.
+
+
+## Merge Sort
+
+### Description
+
+Merge Sort is a highly efficient, comparison-based sorting algorithm that follows the **divide and conquer** paradigm. It works by recursively splitting the array into two halves, sorting each half, and then merging them back together in sorted order. This approach allows Merge Sort to achieve better time complexity than algorithms like Bubble Sort and Insertion Sort, especially for larger datasets.
+
+### Performance
+
+- **Time Complexity**:
+  - **Best Case**: O(n log n)
+  - **Average Case**: O(n log n)
+  - **Worst Case**: O(n log n)
+- **Space Complexity**: O(n) (due to the need for temporary arrays during the merge process)
+- **Stability**: Merge Sort is a stable sorting algorithm, meaning it preserves the relative order of equal elements.
+- **In-Place**: No, Merge Sort requires additional space to store the divided subarrays.
+
+
+### How It Works
+
+1. **Divide**: The array is recursively split into two halves until each subarray has only one element (which is inherently sorted).
+2. **Merge**: The sorted subarrays are then merged back together by comparing the smallest elements from each subarray and copying them into the original array in sorted order.
+3. **Repeat**: This process continues until the entire array is sorted.
+
+### Steps and Example
+
+Let's consider an example where we sort the following array: [12, 11, 13, 5, 6, 7].
+
+1. Initial array: [12, 11, 13, 5, 6, 7]
+   - Split into two halves: [12, 11, 13] and [5, 6, 7]
+
+2. Recursively split both halves:
+   - [12, 11, 13] → [12], [11, 13] → [11], [13]
+   - [5, 6, 7] → [5], [6, 7] → [6], [7]
+
+3. Merge sorted subarrays:
+   - Merge [11] and [13] → [11, 13]
+   - Merge [12] and [11, 13] → [11, 12, 13]
+   - Merge [6] and [7] → [6, 7]
+   - Merge [5] and [6, 7] → [5, 6, 7]
+
+4. Final merge:
+   - Merge [11, 12, 13] and [5, 6, 7] → [5, 6, 7, 11, 12, 13]
+
+The array is now sorted.
+
+### Advantages
+
+- **Efficiency for Large Datasets**: Merge Sort has a time complexity of O(n log n) in all cases, making it faster than algorithms like Bubble Sort and Insertion Sort, which have O(n^2) in the average and worst cases.
+- **Stability**: It maintains the relative order of equal elements.
+- **Consistent Performance**: Merge Sort guarantees O(n log n) time complexity regardless of the input distribution.
+
+### Limitations
+
+- **Space Complexity**: Unlike in-place algorithms like Bubble Sort and Insertion Sort, Merge Sort requires additional space (O(n)) to hold temporary subarrays during the merge process.
+- **Not In-Place**: Because Merge Sort requires extra storage, it is not considered an in-place algorithm.
+
+### Time and Space Complexity Comparison with Other Algorithms
+
+| Algorithm         | Best Case Time | Average Case Time | Worst Case Time | Space Complexity | Stable | In-Place |
+|-------------------|----------------|-------------------|-----------------|------------------|--------|----------|
+| **Bubble Sort**    | O(n)           | O(n^2)            | O(n^2)          | O(1)             | Yes    | Yes      |
+| **Selection Sort** | O(n^2)         | O(n^2)            | O(n^2)          | O(1)             | No     | Yes      |
+| **Insertion Sort** | O(n)           | O(n^2)            | O(n^2)          | O(1)             | Yes    | Yes      |
+| **Merge Sort**     | O(n log n)     | O(n log n)        | O(n log n)      | O(n)             | Yes    | No       |
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Merge Sort in C# in the `MergeSort.cs` class. The algorithm is implemented manually without using predefined functions like `Array.Copy`.
