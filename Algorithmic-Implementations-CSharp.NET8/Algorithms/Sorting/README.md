@@ -284,3 +284,72 @@ The array is now sorted.
 ### Implementation in C#.NET 8
 
 You can see the implementation of Merge Sort in C# in the `MergeSort.cs` class. The algorithm is implemented manually without using predefined functions like `Array.Copy`.
+
+
+## Quick Sort
+
+### Description
+
+Quick Sort is a highly efficient, comparison-based sorting algorithm that uses a **divide-and-conquer** approach. It works by selecting a "pivot" element and partitioning the array into two halves: elements smaller than the pivot and elements greater than the pivot. The two subarrays are then sorted recursively. Quick Sort is popular because of its average-case time complexity of O(n log n) and its in-place nature, which does not require additional space like Merge Sort.
+
+### Performance
+
+- **Time Complexity**:
+  - **Best Case**: O(n log n) (when the pivot divides the array into two nearly equal halves)
+  - **Average Case**: O(n log n)
+  - **Worst Case**: O(n^2) (when the pivot consistently results in highly unbalanced partitions, such as when the array is already sorted or reverse-sorted)
+- **Space Complexity**: O(log n) (due to recursion stack in the average case)
+- **Stability**: Quick Sort is not stable, meaning it does not necessarily preserve the relative order of equal elements.
+- **In-Place**: Yes
+
+### How It Works
+
+1. **Pivot Selection**: Choose an element as the pivot (commonly the last element, but other strategies exist).
+2. **Partitioning**: Rearrange the elements so that those smaller than the pivot are on the left side and those greater than the pivot are on the right side.
+3. **Recursion**: Recursively apply the same process to the subarrays on either side of the pivot.
+4. **Repeat**: Continue the process until the entire array is sorted.
+
+### Steps and Example
+
+Let's consider an example where we sort the following array: [12, 7, 14, 9, 10, 11].
+
+1. Initial array: [12, 7, 14, 9, 10, 11]
+   - Choose 11 as the pivot.
+   - Partition the array: [7, 9, 10] (less than 11) and [12, 14] (greater than 11).
+   - Resulting array after partition: [7, 9, 10, 11, 12, 14].
+
+2. Recursively sort the left subarray [7, 9, 10]:
+   - Choose 10 as the pivot.
+   - Partition the array: [7, 9] (less than 10).
+   - Resulting array: [7, 9, 10].
+
+3. Recursively sort the right subarray [12, 14]:
+   - Already sorted, no changes needed.
+
+The array is now sorted: [7, 9, 10, 11, 12, 14].
+
+### Advantages
+
+- **Efficiency**: Quick Sort is one of the fastest sorting algorithms in practice, especially for large datasets, because of its average-case time complexity of O(n log n).
+- **In-Place Sorting**: Quick Sort sorts the array without requiring additional storage (i.e., in-place sorting), unlike Merge Sort.
+- **Adaptive**: Quick Sort performs well on large and small datasets.
+
+### Limitations
+
+- **Worst-Case Time Complexity**: In the worst case, when the pivot divides the array very unevenly (e.g., when the array is already sorted), the time complexity degrades to O(n^2). This can be mitigated by using better pivot selection strategies, such as **randomized Quick Sort** or **median-of-three** partitioning.
+- **Not Stable**: Quick Sort is not a stable algorithm, meaning it does not preserve the relative order of elements with equal keys.
+- **Recursion Overhead**: For very large datasets, the recursion depth can become a limiting factor, leading to potential stack overflow issues.
+
+### Time and Space Complexity Comparison with Other Sorting Algorithms
+
+| Algorithm         | Best Case Time | Average Case Time | Worst Case Time | Space Complexity | Stable | In-Place |
+|-------------------|----------------|-------------------|-----------------|------------------|--------|----------|
+| **Bubble Sort**    | O(n)           | O(n^2)            | O(n^2)          | O(1)             | Yes    | Yes      |
+| **Selection Sort** | O(n^2)         | O(n^2)            | O(n^2)          | O(1)             | No     | Yes      |
+| **Insertion Sort** | O(n)           | O(n^2)            | O(n^2)          | O(1)             | Yes    | Yes      |
+| **Merge Sort**     | O(n log n)     | O(n log n)        | O(n log n)      | O(n)             | Yes    | No       |
+| **Quick Sort**     | O(n log n)     | O(n log n)        | O(n^2)          | O(log n)         | No     | Yes      |
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Quick Sort in C# in the `QuickSort.cs` class. The algorithm is implemented using the **Lomuto partition scheme**, which selects the last element as the pivot and rearranges the array into two halves.

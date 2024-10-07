@@ -54,6 +54,9 @@ class Program
 
         // Section: Merge Sort
         RunMergeSortDemo();
+
+        // Section: Quick Sort
+        RunQuickSortDemo();
     }
 
     #region Algorithms
@@ -348,6 +351,24 @@ class Program
         MergeSort.Sort(array);
 
         Console.WriteLine("Sorted array using Merge Sort:");
+        PrintArray(array);
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Quick Sort algorithm.
+    /// </summary>
+    private static void RunQuickSortDemo()
+    {
+        // Create an unsorted array for the demonstration
+        int[] array = [12, 7, 14, 9, 10, 11];
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Quick Sort and display the result
+        QuickSort.Sort(array, 0, array.Length - 1);
+
+        Console.WriteLine("Sorted array using Quick Sort:");
         PrintArray(array);
     }
 
