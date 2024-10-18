@@ -57,6 +57,9 @@ class Program
 
         // Section: Quick Sort
         RunQuickSortDemo();
+
+        // Section: Heap Sort
+        RunHeapSortDemo();
     }
 
     #region Algorithms
@@ -371,6 +374,25 @@ class Program
         Console.WriteLine("Sorted array using Quick Sort:");
         PrintArray(array);
     }
+
+    /// <summary>
+    ///     Demonstrates the usage of Heap Sort algorithm.
+    /// </summary>
+    private static void RunHeapSortDemo()
+    {
+        // Create an unsorted array for the demonstration
+        int[] array = [12, 11, 13, 5, 6, 7];
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Heap Sort and display the result
+        HeapSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Heap Sort:");
+        PrintArray(array);
+    }
+
 
     /// <summary>
     ///     Prints the elements of an array.

@@ -353,3 +353,71 @@ The array is now sorted: [7, 9, 10, 11, 12, 14].
 ### Implementation in C#.NET 8
 
 You can see the implementation of Quick Sort in C# in the `QuickSort.cs` class. The algorithm is implemented using the **Lomuto partition scheme**, which selects the last element as the pivot and rearranges the array into two halves.
+
+
+## Heap Sort
+
+### Description
+
+Heap Sort is a highly efficient, comparison-based sorting algorithm that utilizes a **binary heap** data structure. A heap is a special type of complete binary tree where the parent node is always greater (in a **max heap**) or smaller (in a **min heap**) than its children. Heap Sort works by first building a max heap from the input array, then repeatedly extracting the largest element (root of the heap) and placing it at the end of the array. This process is repeated until the entire array is sorted.
+
+### Performance
+
+- **Time Complexity**:
+  - **Best Case**: O(n log n)
+  - **Average Case**: O(n log n)
+  - **Worst Case**: O(n log n)
+- **Space Complexity**: O(1) (in-place sorting)
+- **Stability**: Heap Sort is not stable, meaning it does not necessarily preserve the relative order of equal elements.
+- **In-Place**: Yes
+
+### How It Works
+
+1. **Build Max Heap**: The array is first transformed into a **max heap** (a binary heap where the root is the largest element). This is done by calling the `Heapify` method starting from the middle of the array.
+2. **Extract Elements**: The largest element (root of the heap) is swapped with the last element of the array, and the heap is reduced in size. The `Heapify` method is called again to restore the heap property.
+3. **Repeat**: This process of extracting the root and restoring the heap is repeated until the entire array is sorted.
+
+### Steps and Example
+
+Let's consider an example where we sort the following array: [12, 11, 13, 5, 6, 7].
+
+1. Initial array: [12, 11, 13, 5, 6, 7]
+   - Build the max heap: [13, 11, 12, 5, 6, 7]
+
+2. Extract the largest element (13), swap it with the last element (7), and heapify the reduced heap:
+   - Array after first extraction: [7, 11, 12, 5, 6, 13]
+   - Heapify: [12, 11, 7, 5, 6, 13]
+
+3. Extract the next largest element (12), swap it with the second last element (6), and heapify:
+   - Array after second extraction: [6, 11, 7, 5, 12, 13]
+   - Heapify: [11, 6, 7, 5, 12, 13]
+
+4. Continue the process until the array is sorted:
+   - Sorted array: [5, 6, 7, 11, 12, 13]
+
+### Advantages
+
+- **Efficiency for Large Datasets**: Heap Sort has a time complexity of O(n log n) in all cases, making it efficient for large datasets.
+- **In-Place Sorting**: Heap Sort sorts the array without requiring additional storage (i.e., in-place sorting), unlike Merge Sort.
+- **No Worst-Case Degradation**: Unlike Quick Sort, Heap Sort does not degrade to O(n^2) in the worst case, which makes it more predictable.
+
+### Limitations
+
+- **Not Stable**: Heap Sort is not a stable sorting algorithm, meaning that equal elements may not retain their original relative order.
+- **Performance Overhead**: While Heap Sort guarantees O(n log n) time complexity, it often performs slower in practice compared to Quick Sort due to the overhead of heap operations (swapping elements and maintaining the heap property).
+- **Less Efficient for Small Arrays**: For smaller arrays, algorithms like Insertion Sort might be more efficient due to lower constant factors.
+
+### Time and Space Complexity Comparison with Other Sorting Algorithms
+
+| Algorithm         | Best Case Time | Average Case Time | Worst Case Time | Space Complexity | Stable | In-Place |
+|-------------------|----------------|-------------------|-----------------|------------------|--------|----------|
+| **Bubble Sort**    | O(n)           | O(n^2)            | O(n^2)          | O(1)             | Yes    | Yes      |
+| **Selection Sort** | O(n^2)         | O(n^2)            | O(n^2)          | O(1)             | No     | Yes      |
+| **Insertion Sort** | O(n)           | O(n^2)            | O(n^2)          | O(1)             | Yes    | Yes      |
+| **Merge Sort**     | O(n log n)     | O(n log n)        | O(n log n)      | O(n)             | Yes    | No       |
+| **Quick Sort**     | O(n log n)     | O(n log n)        | O(n^2)          | O(log n)         | No     | Yes      |
+| **Heap Sort**      | O(n log n)     | O(n log n)        | O(n log n)      | O(1)             | No     | Yes      |
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Heap Sort in C# in the `HeapSort.cs` class. The algorithm is implemented using a max heap, where the largest element is moved to the end of the array during each iteration.
