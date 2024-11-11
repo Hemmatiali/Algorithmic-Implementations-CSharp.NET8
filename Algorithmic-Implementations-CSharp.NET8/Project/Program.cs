@@ -60,6 +60,9 @@ class Program
 
         // Section: Heap Sort
         RunHeapSortDemo();
+
+        // Section: Cycle Sort
+        RunCycleSortDemo();
     }
 
     #region Algorithms
@@ -393,6 +396,23 @@ class Program
         PrintArray(array);
     }
 
+    /// <summary>
+    ///     Demonstrates the usage of Cycle Sort algorithm.
+    /// </summary>
+    private static void RunCycleSortDemo()
+    {
+        // Create an unsorted array for the demonstration
+        int[] array = [12, 11, 13, 5, 6, 7];
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Cycle Sort and display the result
+        CycleSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Cycle Sort:");
+        PrintArray(array);
+    }
 
     /// <summary>
     ///     Prints the elements of an array.
