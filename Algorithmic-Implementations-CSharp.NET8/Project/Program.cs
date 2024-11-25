@@ -63,6 +63,9 @@ class Program
 
         // Section: Cycle Sort
         RunCycleSortDemo();
+
+        // Section: Counting Sort
+        RunCountingSortDemo();
     }
 
     #region Algorithms
@@ -412,6 +415,24 @@ class Program
 
         Console.WriteLine("Sorted array using Cycle Sort:");
         PrintArray(array);
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Counting Sort algorithm.
+    /// </summary>
+    private static void RunCountingSortDemo()
+    {
+        // Create an unsorted array for the demonstration
+        int[] array = [4, 2, 2, 8, 3, 3, 1];
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Counting Sort and display the result
+        int[] sortedArray = CountingSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Counting Sort:");
+        PrintArray(sortedArray);
     }
 
     /// <summary>

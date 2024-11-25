@@ -484,3 +484,86 @@ Let's consider an example where we sort the following array: [12, 11, 13, 5, 6].
 ### Implementation in C#.NET 8
 
 You can see the implementation of Cycle Sort in C# in the `CycleSort.cs` class. The algorithm is implemented by arranging elements into cycles and directly placing them in their correct positions.
+
+
+## Counting Sort
+
+### Description
+
+Counting Sort is an integer sorting algorithm that works by counting the occurrences of each unique element in the input data. These counts are then used to determine the position of each element in the sorted output. Counting Sort is particularly efficient when the range of input values (`k`) is small compared to the number of elements (`n`).
+
+Counting Sort is **stable**, meaning it preserves the relative order of equal elements. However, it is not an in-place algorithm because it requires additional memory for the count and output arrays.
+
+### Performance
+
+- **Time Complexity**:
+  - **Best Case**: O(n + k)
+  - **Average Case**: O(n + k)
+  - **Worst Case**: O(n + k)
+- **Space Complexity**: O(n + k)
+- **Stability**: Yes
+- **In-Place**: No
+
+### How It Works
+
+1. **Determine Range**:
+   - Calculate the minimum and maximum values in the input array to determine the range of input data (`k = max - min + 1`).
+
+2. **Count Occurrences**:
+   - Use a count array to store the frequency of each value, adjusted for the minimum value.
+
+3. **Cumulative Counts**:
+   - Transform the count array into a cumulative count array, where each position stores the total count of elements up to that index.
+
+4. **Build the Output Array**:
+   - Traverse the input array in reverse, placing each element at its correct position in the output array using the cumulative count array. Decrement the count after placing each element to handle duplicates correctly.
+
+5. **Return Result**:
+   - Return the sorted output array.
+
+### Steps and Example
+
+Let's consider an example where we sort the following array: [4, 2, 2, 8, 3, 3, 1].
+
+1. **Determine Range**:
+   - Minimum = 1, Maximum = 8, Range = 8 - 1 + 1 = 8.
+
+2. **Count Occurrences**:
+   - Count array: [1, 2, 2, 1, 0, 0, 0, 1] (adjusted for the range).
+
+3. **Cumulative Counts**:
+   - Cumulative count array: [1, 3, 5, 6, 6, 6, 6, 7].
+
+4. **Build the Output Array**:
+   - Place elements in the correct position: [1, 2, 2, 3, 3, 4, 8].
+
+5. **Sorted Array**:
+   - Final output: [1, 2, 2, 3, 3, 4, 8].
+
+### Advantages
+
+- **Efficiency**: Counting Sort is highly efficient for sorting integers with a small range of values.
+- **Stable Sorting**: The algorithm preserves the relative order of elements with equal keys, making it suitable for sorting data with secondary keys.
+- **No Comparisons**: Unlike comparison-based algorithms (e.g., Quick Sort, Merge Sort), Counting Sort determines the sorted order using counting and indexing.
+
+### Limitations
+
+- **Limited to Integers**: Counting Sort is designed for discrete data, primarily integers or elements that can be mapped to integers.
+- **Space Overhead**: Counting Sort requires additional memory proportional to the range of input values (`k`), which can be inefficient for large ranges.
+- **Not In-Place**: The algorithm requires auxiliary memory for the count and output arrays, increasing space complexity.
+
+### Time and Space Complexity Comparison with Other Sorting Algorithms
+
+| Algorithm         | Best Case Time | Average Case Time | Worst Case Time | Space Complexity | Stable | In-Place |
+|-------------------|----------------|-------------------|-----------------|------------------|--------|----------|
+| **Bubble Sort**    | O(n)           | O(n^2)            | O(n^2)          | O(1)             | Yes    | Yes      |
+| **Selection Sort** | O(n^2)         | O(n^2)            | O(n^2)          | O(1)             | No     | Yes      |
+| **Insertion Sort** | O(n)           | O(n^2)            | O(n^2)          | O(1)             | Yes    | Yes      |
+| **Merge Sort**     | O(n log n)     | O(n log n)        | O(n log n)      | O(n)             | Yes    | No       |
+| **Quick Sort**     | O(n log n)     | O(n log n)        | O(n^2)          | O(log n)         | No     | Yes      |
+| **Heap Sort**      | O(n log n)     | O(n log n)        | O(n log n)      | O(1)             | No     | Yes      |
+| **Counting Sort**  | O(n + k)       | O(n + k)          | O(n + k)        | O(n + k)         | Yes    | No       |
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Counting Sort in C# in the `CountingSort.cs` class. The algorithm counts occurrences of each element, builds a cumulative count array, and uses it to determine the correct position of each element in the sorted output.
