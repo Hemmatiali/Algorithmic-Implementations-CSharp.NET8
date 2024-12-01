@@ -66,6 +66,9 @@ class Program
 
         // Section: Counting Sort
         RunCountingSortDemo();
+
+        // Section: Radix Sort
+        RunRadixSortDemo();
     }
 
     #region Algorithms
@@ -433,6 +436,24 @@ class Program
 
         Console.WriteLine("Sorted array using Counting Sort:");
         PrintArray(sortedArray);
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Radix Sort algorithm.
+    /// </summary>
+    private static void RunRadixSortDemo()
+    {
+        // Create an unsorted array for the demonstration
+        int[] array = [170, 45, 75, 90, 802, 24, 2, 66];
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Radix Sort and display the result
+        RadixSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Radix Sort:");
+        PrintArray(array);
     }
 
     /// <summary>

@@ -567,3 +567,80 @@ Let's consider an example where we sort the following array: [4, 2, 2, 8, 3, 3, 
 ### Implementation in C#.NET 8
 
 You can see the implementation of Counting Sort in C# in the `CountingSort.cs` class. The algorithm counts occurrences of each element, builds a cumulative count array, and uses it to determine the correct position of each element in the sorted output.
+
+## Radix Sort
+
+### Description
+
+Radix Sort is a **stable**, non-comparison-based sorting algorithm that sorts elements by processing individual digits from the least significant digit (LSD) to the most significant digit (MSD). It relies on a subroutine, typically **Counting Sort**, to sort the elements based on the current digit being processed. Radix Sort is particularly efficient for sorting integers or strings that can be represented in positional notation.
+
+### Performance
+
+- **Time Complexity**:
+  - **Best Case**: O(n + k) * d
+  - **Average Case**: O(n + k) * d
+  - **Worst Case**: O(n + k) * d
+    - Here:
+      - `n` = Number of elements in the input array.
+      - `k` = Range of digits (typically 10 for decimal system).
+      - `d` = Number of digits in the largest number in the array.
+- **Space Complexity**: O(n + k) (for the auxiliary arrays used during Counting Sort)
+- **Stability**: Yes
+- **In-Place**: No
+
+### How It Works
+
+1. **Determine the Maximum Value**:
+   - Find the largest number in the array to determine the number of digits (`d`).
+
+2. **Sort by Each Digit**:
+   - Starting with the least significant digit (LSD), sort all elements based on the value of that digit using a stable sort, typically **Counting Sort**.
+   - Repeat the process for each subsequent digit up to the most significant digit (MSD).
+
+3. **Combine Results**:
+   - After processing all digits, the array will be fully sorted.
+
+### Steps and Example
+
+Let's consider an example where we sort the following array: [170, 45, 75, 90, 802, 24, 2, 66].
+
+1. **Step 1**: Sort by the Least Significant Digit (LSD):
+   - Original Array: [170, 45, 75, 90, 802, 24, 2, 66]
+   - Sorted by LSD: [802, 2, 24, 45, 66, 170, 75, 90]
+
+2. **Step 2**: Sort by the Tens Digit:
+   - Intermediate Array: [802, 2, 24, 45, 66, 170, 75, 90]
+   - Sorted by Tens: [802, 2, 24, 45, 66, 75, 90, 170]
+
+3. **Step 3**: Sort by the Most Significant Digit (MSD):
+   - Intermediate Array: [802, 2, 24, 45, 66, 75, 90, 170]
+   - Final Sorted Array: [2, 24, 45, 66, 75, 90, 170, 802]
+
+### Advantages
+
+- **Efficiency for Large Data**: Radix Sort is highly efficient for sorting integers with a large range when the number of digits (`d`) is small compared to the number of elements (`n`).
+- **Stable Sorting**: The algorithm preserves the relative order of equal elements.
+- **No Comparisons**: Unlike traditional comparison-based algorithms (e.g., Quick Sort, Merge Sort), Radix Sort processes elements based on their digits.
+
+### Limitations
+
+- **Not In-Place**: Radix Sort requires additional memory for auxiliary arrays.
+- **Limited to Positional Data**: It is best suited for data that can be represented in positional notation (e.g., integers or strings).
+- **Dependent on Digits**: The efficiency depends on the number of digits (`d`), which can make it less efficient for data with a large number of digits.
+
+### Time and Space Complexity Comparison with Other Sorting Algorithms
+
+| Algorithm         | Best Case Time   | Average Case Time | Worst Case Time | Space Complexity | Stable | In-Place |
+|-------------------|------------------|-------------------|-----------------|------------------|--------|----------|
+| **Bubble Sort**    | O(n)            | O(n^2)            | O(n^2)          | O(1)             | Yes    | Yes      |
+| **Selection Sort** | O(n^2)          | O(n^2)            | O(n^2)          | O(1)             | No     | Yes      |
+| **Insertion Sort** | O(n)            | O(n^2)            | O(n^2)          | O(1)             | Yes    | Yes      |
+| **Merge Sort**     | O(n log n)      | O(n log n)        | O(n log n)      | O(n)             | Yes    | No       |
+| **Quick Sort**     | O(n log n)      | O(n log n)        | O(n^2)          | O(log n)         | No     | Yes      |
+| **Heap Sort**      | O(n log n)      | O(n log n)        | O(n log n)      | O(1)             | No     | Yes      |
+| **Counting Sort**  | O(n + k)        | O(n + k)          | O(n + k)        | O(n + k)         | Yes    | No       |
+| **Radix Sort**     | O(nk) (n + k)d  | O(nk)             | O(nk)           | O(n + k)         | Yes    | No       |
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Radix Sort in C# in the `RadixSort.cs` class. The algorithm processes elements digit by digit, using **Counting Sort** as a stable subroutine.
