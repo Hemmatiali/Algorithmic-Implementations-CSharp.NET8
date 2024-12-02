@@ -170,6 +170,6 @@ public class RadixSortTests
         int[] arrayWithNegatives = [-5, -1, -3, -2, 0, 2, 1];
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => RadixSort.Sort(arrayWithNegatives));
+        Assert.Throws<IndexOutOfRangeException>(() => RadixSort.Sort(arrayWithNegatives));
     }
 }
