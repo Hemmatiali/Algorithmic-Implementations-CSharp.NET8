@@ -644,3 +644,90 @@ Let's consider an example where we sort the following array: [170, 45, 75, 90, 8
 ### Implementation in C#.NET 8
 
 You can see the implementation of Radix Sort in C# in the `RadixSort.cs` class. The algorithm processes elements digit by digit, using **Counting Sort** as a stable subroutine.
+
+
+## Bucket Sort
+
+### Description
+
+Bucket Sort is a **comparison-based** sorting algorithm that distributes elements into multiple buckets. Each bucket is then sorted individually using a different sorting algorithm, typically Insertion Sort. It is particularly efficient when the input data is uniformly distributed over a range.
+
+### Performance
+
+- **Time Complexity**:
+  - **Best Case**: O(n + k)
+  - **Average Case**: O(n + k)
+  - **Worst Case**: O(n^2) (if all elements land in the same bucket)
+    - Here:
+      - `n` = Number of elements in the input array.
+      - `k` = Number of buckets.
+- **Space Complexity**: O(n + k)
+- **Stability**: No (depends on the sub-sorting algorithm used)
+- **In-Place**: No
+
+### How It Works
+
+1. **Determine Bucket Range**:
+   - Calculate the range of input values and distribute them into buckets based on this range.
+
+2. **Distribute Elements**:
+   - Each element from the input array is assigned to a bucket based on a hashing function.
+
+3. **Sort Buckets**:
+   - Sort individual buckets using a simpler sorting algorithm, such as Insertion Sort.
+
+4. **Concatenate Results**:
+   - Combine all sorted buckets into the final sorted array.
+
+
+### Steps and Example
+
+Let's consider an example where we sort the following array: [0.897, 0.565, 0.656, 0.1234, 0.665, 0.3434].
+
+1. **Step 1**: Distribute Elements into Buckets:
+   - Buckets:
+     - Bucket 0: [0.1234]
+     - Bucket 1: [0.3434]
+     - Bucket 5: [0.565]
+     - Bucket 6: [0.656, 0.665]
+     - Bucket 8: [0.897]
+
+2. **Step 2**: Sort Individual Buckets:
+   - Sorted Buckets:
+     - Bucket 0: [0.1234]
+     - Bucket 1: [0.3434]
+     - Bucket 5: [0.565]
+     - Bucket 6: [0.656, 0.665]
+     - Bucket 8: [0.897]
+
+3. **Step 3**: Concatenate Buckets:
+   - Final Sorted Array: [0.1234, 0.3434, 0.565, 0.656, 0.665, 0.897]
+
+### Advantages
+
+- **Efficient for Uniform Data**: Works well for data that is uniformly distributed over a range.
+- **Parallelizable**: Sorting buckets can be parallelized.
+
+### Limitations
+
+- **Depends on Data Distribution**: Performance heavily depends on the distribution of input data.
+- **Requires Extra Space**: Additional memory is needed for buckets.
+- **Choice of Bucket Count**: Improper choice of the number of buckets can lead to inefficiency.
+
+### Time and Space Complexity Comparison with Other Sorting Algorithms
+
+| Algorithm         | Best Case Time   | Average Case Time | Worst Case Time | Space Complexity | Stable | In-Place |
+|-------------------|------------------|-------------------|-----------------|------------------|--------|----------|
+| **Bubble Sort**    | O(n)            | O(n^2)            | O(n^2)          | O(1)             | Yes    | Yes      |
+| **Selection Sort** | O(n^2)          | O(n^2)            | O(n^2)          | O(1)             | No     | Yes      |
+| **Insertion Sort** | O(n)            | O(n^2)            | O(n^2)          | O(1)             | Yes    | Yes      |
+| **Merge Sort**     | O(n log n)      | O(n log n)        | O(n log n)      | O(n)             | Yes    | No       |
+| **Quick Sort**     | O(n log n)      | O(n log n)        | O(n^2)          | O(log n)         | No     | Yes      |
+| **Heap Sort**      | O(n log n)      | O(n log n)        | O(n log n)      | O(1)             | No     | Yes      |
+| **Counting Sort**  | O(n + k)        | O(n + k)          | O(n + k)        | O(n + k)         | Yes    | No       |
+| **Radix Sort**     | O(nk) (n + k)d  | O(nk)             | O(nk)           | O(n + k)         | Yes    | No       |
+| **Bucket Sort**    | O(n + k)        | O(n + k)          | O(n^2)          | O(n + k)         | No     | No       |
+
+### Implementation in C#.NET 8
+
+You can see the implementation of Bucket Sort in C# in the `BucketSort.cs` class. The algorithm efficiently handles fractional values distributed across buckets, sorted individually.

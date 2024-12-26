@@ -69,6 +69,9 @@ class Program
 
         // Section: Radix Sort
         RunRadixSortDemo();
+
+        // Section: Bucket Sort
+        RunBucketSortDemo();
     }
 
     #region Algorithms
@@ -457,10 +460,41 @@ class Program
     }
 
     /// <summary>
+    ///     Demonstrates the usage of Bucket Sort algorithm.
+    /// </summary>
+    private static void RunBucketSortDemo()
+    {
+        // Create an unsorted array for the demonstration
+        float[] array = [0.897f, 0.565f, 0.656f, 0.1234f, 0.665f, 0.3434f];
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Bucket Sort and display the result
+        BucketSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Bucket Sort:");
+        PrintArray(array);
+    }
+
+    /// <summary>
     ///     Prints the elements of an array.
     /// </summary>
     /// <param name="array">The array to be printed.</param>
     private static void PrintArray(int[] array)
+    {
+        foreach (var item in array)
+        {
+            Console.Write(item + " ");
+        }
+        Console.WriteLine();
+    }
+
+    /// <summary>
+    ///     Prints the elements of a float array.
+    /// </summary>
+    /// <param name="array">The array to be printed.</param>
+    private static void PrintArray(float[] array)
     {
         foreach (var item in array)
         {
