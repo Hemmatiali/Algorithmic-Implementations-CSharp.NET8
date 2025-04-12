@@ -72,6 +72,9 @@ class Program
 
         // Section: Bucket Sort
         RunBucketSortDemo();
+
+        // Section: Shell Sort
+        RunShellSortDemo();
     }
 
     #region Algorithms
@@ -474,6 +477,29 @@ class Program
         BucketSort.Sort(array);
 
         Console.WriteLine("Sorted array using Bucket Sort:");
+        PrintArray(array);
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Shell Sort algorithm.
+    /// </summary>
+    private static void RunShellSortDemo()
+    {
+        // Generate a random array of integers
+        Random random = new();
+        int[] array = new int[10];
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = random.Next(1, 101); // Random integers between 1 and 100
+        }
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Shell Sort and display the result
+        ShellSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Shell Sort:");
         PrintArray(array);
     }
 

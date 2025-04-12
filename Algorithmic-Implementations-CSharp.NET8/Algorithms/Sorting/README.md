@@ -731,3 +731,75 @@ Let's consider an example where we sort the following array: [0.897, 0.565, 0.65
 ### Implementation in C#.NET 8
 
 You can see the implementation of Bucket Sort in C# in the `BucketSort.cs` class. The algorithm efficiently handles fractional values distributed across buckets, sorted individually.
+
+## Shell Sort
+
+### Description
+
+Shell Sort is an **in-place**, **comparison-based** sorting algorithm that generalizes Insertion Sort to allow exchanges of items that are far apart. The idea is to arrange the data sequence in a way that elements far apart can be moved closer quickly. It reduces the number of shifts required in later stages of Insertion Sort by initially sorting elements that are far apart.
+
+It was invented by **Donald Shell** in 1959 and is an improvement over Insertion Sort.
+
+### Performance
+
+- **Time Complexity** *(depends on gap sequence)*:
+  - **Best Case**: O(n log n)
+  - **Average Case**: O(n^3/2) or better
+  - **Worst Case**: O(n²)
+- **Space Complexity**: O(1)
+- **Stability**: No
+- **In-Place**: Yes
+
+### How It Works
+
+1. **Gap Selection**:
+   - Start with a large gap, typically `n / 2`, and reduce it by half each iteration.
+
+2. **Gapped Insertion Sort**:
+   - Perform insertion sort for elements separated by the current gap.
+
+3. **Repeat**:
+   - Continue the process, reducing the gap until it reaches 1.
+
+4. **Final Pass**:
+   - With a gap of 1, a final insertion sort ensures the array is fully sorted.
+
+### Steps and Example
+
+Let's say we want to sort this array:  
+`[12, 34, 54, 2, 3]`
+
+1. **Initial gap = 2**:
+   - Compare and sort elements 2 positions apart.
+   - Intermediate result: `[12, 3, 54, 2, 34]`
+
+2. **Next gap = 1**:
+   - Perform standard insertion sort.
+   - Final sorted array: `[2, 3, 12, 34, 54]`
+
+### Advantages
+
+- **More Efficient than Insertion Sort**: Especially for medium-sized arrays.
+- **In-Place**: Doesn’t require extra memory.
+- **Simple to Implement**: Compared to more complex algorithms like Merge or Quick Sort.
+
+### Limitations
+
+- **Not Stable**: Equal elements may not retain their original order.
+- **Performance Depends on Gap Sequence**: Optimal gap sequences can be complex (e.g., Hibbard, Sedgewick).
+
+### Time and Space Complexity Comparison with Other Sorting Algorithms
+
+| Algorithm         | Best Case Time | Average Case Time | Worst Case Time | Space Complexity | Stable | In-Place |
+|------------------|----------------|-------------------|-----------------|------------------|--------|----------|
+| **Bubble Sort**   | O(n)           | O(n²)             | O(n²)           | O(1)             | Yes    | Yes      |
+| **Selection Sort**| O(n²)          | O(n²)             | O(n²)           | O(1)             | No     | Yes      |
+| **Insertion Sort**| O(n)           | O(n²)             | O(n²)           | O(1)             | Yes    | Yes      |
+| **Shell Sort**    | O(n log n)     | O(n^1.5)          | O(n²)           | O(1)             | No     | Yes      |
+| **Merge Sort**    | O(n log n)     | O(n log n)        | O(n log n)      | O(n)             | Yes    | No       |
+| **Quick Sort**    | O(n log n)     | O(n log n)        | O(n²)           | O(log n)         | No     | Yes      |
+| **Heap Sort**     | O(n log n)     | O(n log n)        | O(n log n)      | O(1)             | No     | Yes      |
+
+### Implementation in C#.NET 8
+
+You can find the Shell Sort algorithm implemented in the `ShellSort.cs` class inside the `SortingLibrary` namespace. It follows a classic implementation with gap reduction by half.
