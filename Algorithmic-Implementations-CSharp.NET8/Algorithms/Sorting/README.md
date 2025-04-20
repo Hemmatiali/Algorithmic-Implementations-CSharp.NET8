@@ -803,3 +803,67 @@ Let's say we want to sort this array:
 ### Implementation in C#.NET 8
 
 You can find the Shell Sort algorithm implemented in the `ShellSort.cs` class inside the `SortingLibrary` namespace. It follows a classic implementation with gap reduction by half.
+
+## Tim Sort
+
+### Description
+
+Tim Sort is a hybrid, stable, comparison-based sorting algorithm that combines the best properties of **Insertion Sort** and **Merge Sort**. It was designed to perform well on many kinds of real-world data and is the default sorting algorithm in Python and Java.
+
+It divides the array into small **runs** (typically size 32), sorts them using Insertion Sort, and then merges them using Merge Sort.
+
+### Performance
+
+- **Time Complexity**:
+  - **Best Case**: O(n)
+  - **Average Case**: O(n log n)
+  - **Worst Case**: O(n log n)
+- **Space Complexity**: O(n)
+- **Stability**: Yes
+- **In-Place**: No (requires auxiliary arrays during merge)
+
+### How It Works
+
+1. **Divide into Runs**:
+   - The array is divided into small fixed-size chunks (called runs).
+   - Each run is sorted using Insertion Sort (fast on small data).
+
+2. **Merge Runs**:
+   - The sorted runs are merged using Merge Sort logic until the full array is sorted.
+
+### Steps and Example
+
+Given an array: `[23, 12, 1, 8, 34, 54, 2, 3]`
+
+1. **Runs of size 32 or smaller** are sorted with Insertion Sort:
+   - Runs: `[23, 12, 1, 8, 34, 54, 2, 3]`
+   - After Insertion Sort: `[1, 2, 3, 8, 12, 23, 34, 54]`
+
+2. **Merge step** (if multiple runs exist) is applied:
+   - Final sorted array: `[1, 2, 3, 8, 12, 23, 34, 54]`
+
+### Advantages
+
+- **Efficient on Real-World Data**: Especially for partially sorted arrays.
+- **Stable**: Maintains the relative order of equal elements.
+- **Adaptive**: Performs well across a wide range of inputs.
+
+### Limitations
+
+- **Not In-Place**: Requires extra space for merging.
+- **Slightly Complex**: More involved implementation than other basic sorts.
+
+### Time and Space Complexity Comparison with Other Sorting Algorithms
+
+| Algorithm         | Best Case Time | Average Case Time | Worst Case Time | Space Complexity | Stable | In-Place |
+|------------------|----------------|-------------------|-----------------|------------------|--------|----------|
+| **Bubble Sort**   | O(n)           | O(n²)             | O(n²)           | O(1)             | Yes    | Yes      |
+| **Selection Sort**| O(n²)          | O(n²)             | O(n²)           | O(1)             | No     | Yes      |
+| **Insertion Sort**| O(n)           | O(n²)             | O(n²)           | O(1)             | Yes    | Yes      |
+| **Merge Sort**    | O(n log n)     | O(n log n)        | O(n log n)      | O(n)             | Yes    | No       |
+| **Quick Sort**    | O(n log n)     | O(n log n)        | O(n²)           | O(log n)         | No     | Yes      |
+| **Tim Sort**      | O(n)           | O(n log n)        | O(n log n)      | O(n)             | Yes    | No       |
+
+### Implementation in C#.NET 8
+
+The `TimSort.cs` class implements this hybrid algorithm using a run size of 32. It uses Insertion Sort for small chunks and Merge Sort for merging, offering fast and stable performance across various datasets.

@@ -75,6 +75,9 @@ class Program
 
         // Section: Shell Sort
         RunShellSortDemo();
+
+        // Section: Tim Sort
+        RunTimSortDemo();
     }
 
     #region Algorithms
@@ -500,6 +503,29 @@ class Program
         ShellSort.Sort(array);
 
         Console.WriteLine("Sorted array using Shell Sort:");
+        PrintArray(array);
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Tim Sort algorithm.
+    /// </summary>
+    private static void RunTimSortDemo()
+    {
+        // Generate a random array of integers
+        Random random = new();
+        int[] array = new int[10];
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = random.Next(1, 101); // Random integers between 1 and 100
+        }
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Tim Sort and display the result
+        TimSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Tim Sort:");
         PrintArray(array);
     }
 
