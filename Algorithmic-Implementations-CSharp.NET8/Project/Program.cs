@@ -78,6 +78,9 @@ class Program
 
         // Section: Tim Sort
         RunTimSortDemo();
+
+        // Section: Bitonic Sort
+        RunBitonicSortDemo();
     }
 
     #region Algorithms
@@ -526,6 +529,29 @@ class Program
         TimSort.Sort(array);
 
         Console.WriteLine("Sorted array using Tim Sort:");
+        PrintArray(array);
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Bitonic Sort algorithm.
+    /// </summary>
+    private static void RunBitonicSortDemo()
+    {
+        // Random array with length as a power of 2 like 8
+        Random random = new();
+        int[] array = new int[8];
+        for (int i = 0; i < array.Length; i++)
+        {
+            // Random integers between 1 and 100
+            array[i] = random.Next(1, 101); 
+        }
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        BitonicSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Bitonic Sort:");
         PrintArray(array);
     }
 

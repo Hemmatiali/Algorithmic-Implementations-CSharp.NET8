@@ -867,3 +867,78 @@ Given an array: `[23, 12, 1, 8, 34, 54, 2, 3]`
 ### Implementation in C#.NET 8
 
 The `TimSort.cs` class implements this hybrid algorithm using a run size of 32. It uses Insertion Sort for small chunks and Merge Sort for merging, offering fast and stable performance across various datasets.
+
+## Bitonic Sort
+
+### Description
+
+Bitonic Sort is a **parallel**, comparison-based sorting algorithm that works best on input sizes that are powers of two. It recursively builds bitonic sequences (sequences that first increase and then decrease), then merges them in sorted order. Due to its predictable structure and parallelism, it is often used in **parallel computing**, such as GPU or FPGA environments.
+
+Bitonic Sort was introduced by **Ken Batcher** and is primarily useful in systems that benefit from parallel execution.
+
+### Performance
+
+- **Time Complexity**:
+  - **Best Case**: O(log² n)
+  - **Average Case**: O(log² n)
+  - **Worst Case**: O(log² n)
+- **Space Complexity**: O(1) (in-place)
+- **Stability**: No
+- **In-Place**: Yes
+- **Parallelizable**: Yes (highly)
+
+### How It Works
+
+1. **Split the Array**:
+   - The array is divided recursively into two halves.
+   - The first half is sorted in ascending order and the second in descending order.
+
+2. **Create Bitonic Sequences**:
+   - These two halves now form a bitonic sequence (first increases, then decreases).
+
+3. **Merge the Bitonic Sequence**:
+   - A bitonic merge is applied to produce a sorted sequence in the desired order.
+
+4. **Recursive Merging**:
+   - This process is repeated recursively until the whole array is sorted.
+
+### Steps and Example
+
+Given an array:  
+`[3, 7, 4, 8, 6, 2, 1, 5]` (length = 8, power of 2)
+
+1. Split and recursively sort:
+   - Ascending half: `[3, 7, 4, 8]`
+   - Descending half: `[6, 2, 1, 5]`
+
+2. Create bitonic sequence:
+   - `[3, 7, 4, 8, 6, 2, 1, 5]` (bitonic)
+
+3. Merge:
+   - Final sorted: `[1, 2, 3, 4, 5, 6, 7, 8]`
+
+### Advantages
+
+- **Highly Parallelizable**: Can be efficiently implemented on parallel hardware.
+- **Deterministic Structure**: Predictable control flow is useful in hardware implementations.
+- **In-Place**: No extra memory is needed.
+
+### Limitations
+
+- **Only works optimally for sizes that are powers of two**.
+- **Not practical for general CPU use**: Compared to Quick Sort or Merge Sort, it's slower and more complex on standard machines.
+- **Not Stable**: Equal elements may not preserve their relative order.
+
+### Time and Space Complexity Comparison with Other Sorting Algorithms
+
+| Algorithm         | Best Case Time | Average Case Time | Worst Case Time | Space Complexity | Stable | In-Place |
+|------------------|----------------|-------------------|-----------------|------------------|--------|----------|
+| **Bubble Sort**   | O(n)           | O(n²)             | O(n²)           | O(1)             | Yes    | Yes      |
+| **Merge Sort**    | O(n log n)     | O(n log n)        | O(n log n)      | O(n)             | Yes    | No       |
+| **Quick Sort**    | O(n log n)     | O(n log n)        | O(n²)           | O(log n)         | No     | Yes      |
+| **Tim Sort**      | O(n)           | O(n log n)        | O(n log n)      | O(n)             | Yes    | No       |
+| **Bitonic Sort**  | O(log² n)      | O(log² n)         | O(log² n)       | O(1)             | No     | Yes      |
+
+### Implementation in C#.NET 8
+
+You can find the Bitonic Sort implementation in the `BitonicSort.cs` class. The algorithm is implemented recursively and performs in-place sorting, assuming the array length is a power of two.
