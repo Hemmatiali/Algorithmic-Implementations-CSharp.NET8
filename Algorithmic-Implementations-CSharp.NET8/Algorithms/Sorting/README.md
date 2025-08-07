@@ -942,3 +942,64 @@ Given an array:
 ### Implementation in C#.NET 8
 
 You can find the Bitonic Sort implementation in the `BitonicSort.cs` class. The algorithm is implemented recursively and performs in-place sorting, assuming the array length is a power of two.
+
+
+## Odd-Even (Brick) Sort
+
+### Description
+
+Odd-Even Sort—also called **Brick Sort**—is a simple, comparison-based, in-place sorting algorithm closely related to Bubble Sort.  
+Instead of repeatedly scanning the whole list, it alternates two partial “bubble” passes:
+
+1. **Odd phase:** compare / swap pairs (1, 2), (3, 4), …  
+2. **Even phase:** compare / swap pairs (0, 1), (2, 3), …
+
+These two phases are repeated until a full cycle completes with **no swaps**, indicating the list is sorted.  
+Because the odd and even phases are independent, the algorithm is easy to parallelise on SIMD or GPU hardware.
+
+### Performance
+
+| Metric | Value |
+|--------|-------|
+| **Best Case** | O(n)  &nbsp;*(already sorted)* |
+| **Average Case** | O(n²) |
+| **Worst Case** | O(n²) |
+| **Space Complexity** | O(1) (in-place) |
+| **Stable** | Yes |
+| **Parallelisable** | Yes (odd & even passes) |
+
+### How It Works
+
+1. **Initial Pass**  
+   - Array: `[34, 2, 25, 12, 22, 11]`
+2. **Odd Phase** (index 1↔2, 3↔4, …)  
+   - Swap `2 ↔ 25` ⇒ `[34, 2, 25, 12, 22, 11]` → `[34, 2, 25, 12, 22, 11]`
+3. **Even Phase** (index 0↔1, 2↔3, …)  
+   - Swap `34 ↔ 2`, swap `25 ↔ 12` ⇒ `[2, 34, 12, 25, 22, 11]`
+4. **Repeat** odd / even passes until no swaps occur.
+
+### Advantages
+
+- **In-place & simple**—only adjacent swaps.
+- **Naturally parallel**—odd and even comparisons are independent.
+- **Stable**—equal elements keep their relative order.
+
+### Limitations
+
+- **O(n²)** average/worst-case cost—slower than Quick Sort, Merge Sort, etc.
+- Mostly used for teaching or for highly parallel hardware where simplicity outweighs big-O cost.
+
+### Complexity Comparison
+
+| Algorithm        | Best | Avg | Worst | Space | Stable |
+|------------------|------|-----|-------|-------|--------|
+| Bubble Sort      | O(n) | O(n²) | O(n²) | O(1) | ✔ |
+| **Odd-Even Sort**| O(n) | O(n²) | O(n²) | O(1) | ✔ |
+| Insertion Sort   | O(n) | O(n²) | O(n²) | O(1) | ✔ |
+| Merge Sort       | O(n log n) | O(n log n) | O(n log n) | O(n) | ✔ |
+| Quick Sort       | O(n log n) | O(n log n) | O(n²) | O(log n) | ✘ |
+
+### Implementation in C#.NET 8
+
+The full implementation is available in **`OddEvenSort.cs`** inside the `SortingLibrary` namespace.  
+The algorithm alternates odd and even passes until the `sorted` flag remains `true` for an entire cycle.

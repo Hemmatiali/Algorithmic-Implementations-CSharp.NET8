@@ -81,6 +81,9 @@ class Program
 
         // Section: Bitonic Sort
         RunBitonicSortDemo();
+
+        // Section: Odd-Even Sort
+        RunOddEvenSortDemo();
     }
 
     #region Algorithms
@@ -552,6 +555,29 @@ class Program
         BitonicSort.Sort(array);
 
         Console.WriteLine("Sorted array using Bitonic Sort:");
+        PrintArray(array);
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Odd-Even Sort algorithm.
+    /// </summary>
+    private static void RunOddEvenSortDemo()
+    {
+        // Generate a random array of integers
+        Random random = new();
+        int[] array = new int[10];
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = random.Next(1, 101); // Random integers between 1 and 100
+        }
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Odd-Even Sort and display the result
+        OddEvenSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Odd-Even Sort:");
         PrintArray(array);
     }
 
