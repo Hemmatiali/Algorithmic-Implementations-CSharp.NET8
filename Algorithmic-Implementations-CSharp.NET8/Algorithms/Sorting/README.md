@@ -1003,3 +1003,78 @@ Because the odd and even phases are independent, the algorithm is easy to parall
 
 The full implementation is available in **`OddEvenSort.cs`** inside the `SortingLibrary` namespace.  
 The algorithm alternates odd and even passes until the `sorted` flag remains `true` for an entire cycle.
+
+
+## Intro Sort (Introspective Sort)
+
+### Description
+
+**Intro Sort** is a hybrid, comparison-based sorting algorithm that combines **Quick Sort** for speed, **Heap Sort** as a worst-case fallback, and **Insertion Sort** for small partitions. It starts with Quick Sort; if recursion gets too deep (risking Quick Sort’s worst case), it switches to Heap Sort, guaranteeing **O(n log n)** worst-case time.
+
+This implementation uses:
+- **Median-of-three** pivot selection (improves partition quality)
+- **Depth limit** = `2 * ⌊log₂ n⌋`
+- **Insertion Sort** for partitions smaller than a threshold (e.g., 16)
+
+### Performance
+
+- **Time Complexity**:
+  - **Best**: O(n log n)
+  - **Average**: O(n log n)
+  - **Worst**: O(n log n) *(due to Heap Sort fallback)*
+- **Space Complexity**: O(log n) *(recursion stack)*
+- **Stability**: No
+- **In-Place**: Yes *(aside from recursion stack)*
+
+### How It Works
+
+1. **Start with Quick Sort**
+   - Pick a pivot via **median-of-three** of `(left, mid, right)`.
+   - Partition the array around the pivot.
+
+2. **Monitor Recursion Depth**
+   - Maintain a **depth limit** of `2 * ⌊log₂ n⌋`.
+   - If the limit is reached, **switch to Heap Sort** on that subarray.
+
+3. **Use Insertion Sort for Small Ranges**
+   - When a subarray size ≤ threshold (e.g., 16), finish it with **Insertion Sort**.
+
+4. **Tail Recursion Optimization**
+   - Recurse on the **smaller** partition first; loop over the larger to reduce stack depth.
+
+### Steps and Example
+
+Given: `[23, 12, 1, 8, 34, 54, 2, 3]`
+
+1. Quick Sort with median-of-three pivot; partition into smaller subarrays.
+2. For tiny partitions (≤ 16), switch to **Insertion Sort**.
+3. If recursion depth exceeds limit, **Heap Sort** the current range.
+4. Final: `[1, 2, 3, 8, 12, 23, 34, 54]`
+
+### Advantages
+
+- **Guaranteed O(n log n) worst case** via Heap Sort fallback.
+- **Fast in practice** (Quick Sort behavior on average).
+- **Cache-friendly** due to small-range Insertion Sort.
+- **In-place**, low extra memory usage.
+
+### Limitations
+
+- **Not stable** (relative order of equal elements may change).
+- More complex than single-strategy sorts (e.g., pure Quick/Merge/Heap).
+
+### Time and Space Complexity Comparison
+
+| Algorithm        | Best        | Average     | Worst       | Space     | Stable | In-Place |
+|------------------|-------------|-------------|-------------|-----------|--------|---------|
+| Insertion Sort   | O(n)        | O(n²)       | O(n²)       | O(1)      | Yes    | Yes     |
+| Merge Sort       | O(n log n)  | O(n log n)  | O(n log n)  | O(n)      | Yes    | No      |
+| Quick Sort       | O(n log n)  | O(n log n)  | O(n²)       | O(log n)  | No     | Yes     |
+| Heap Sort        | O(n log n)  | O(n log n)  | O(n log n)  | O(1)      | No     | Yes     |
+| **Intro Sort**   | O(n log n)  | O(n log n)  | O(n log n)  | O(log n)  | No     | Yes     |
+
+### Implementation in C#.NET 8
+
+See **`IntroSort.cs`** in the `SortingLibrary` namespace.  
+It uses median-of-three partitioning, a depth limit (`2 * ⌊log₂ n⌋`), Heap Sort fallback, and an Insertion Sort threshold of 16.
+

@@ -84,6 +84,9 @@ class Program
 
         // Section: Odd-Even Sort
         RunOddEvenSortDemo();
+
+        // Section: Intro Sort
+        RunIntroSortDemo();
     }
 
     #region Algorithms
@@ -580,6 +583,31 @@ class Program
         Console.WriteLine("Sorted array using Odd-Even Sort:");
         PrintArray(array);
     }
+
+
+    /// <summary>
+    ///     Demonstrates the usage of Intro Sort algorithm.
+    /// </summary>
+    private static void RunIntroSortDemo()
+    {
+        // Generate a random array of integers
+        Random random = new();
+        int[] array = new int[10];
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = random.Next(1, 101); // Random integers between 1 and 100
+        }
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Intro Sort and display the result
+        IntroSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Intro Sort:");
+        PrintArray(array);
+    }
+
 
     /// <summary>
     ///     Prints the elements of an array.
