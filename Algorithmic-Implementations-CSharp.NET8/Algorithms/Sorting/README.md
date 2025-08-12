@@ -1078,3 +1078,76 @@ Given: `[23, 12, 1, 8, 34, 54, 2, 3]`
 See **`IntroSort.cs`** in the `SortingLibrary` namespace.  
 It uses median-of-three partitioning, a depth limit (`2 * ⌊log₂ n⌋`), Heap Sort fallback, and an Insertion Sort threshold of 16.
 
+## Gapped Insertion Sort (Shell Pass)
+
+### Description
+
+**Gapped Insertion Sort** is the core operation behind **Shell Sort**.  
+It performs an insertion-sort–like pass where elements are compared and shifted in steps of a given **gap** (e.g., compare `a[i]` with `a[i-gap]`, `a[i-2*gap]`, …).  
+A **single pass** with gap `g` produces a **g-sorted** array (each of the `g` interleaved subsequences is individually sorted).  
+To fully sort an array, multiple passes are applied with decreasing gaps (typical Shell sequences), ending with `gap = 1`.
+
+> Use cases:
+> - As a **utility** inside Shell Sort.
+> - As a targeted **local smoothing** step for nearly g-sorted data.
+
+### Performance
+
+- **Per Pass (fixed gap g)**:
+  - **Best Case**: O(n) *(already g-sorted)*
+  - **Average Case**: O(n·k) — behaves like insertion sort on `k ≈ n/g` items per subsequence (rule-of-thumb)
+  - **Worst Case**: O(n²)
+- **Space Complexity**: O(1) *(in-place)*
+- **Stability**: **Not guaranteed** globally (stable only within each gap-subsequence)
+- **In-Place**: Yes
+
+> Overall Shell Sort complexity depends on the **gap sequence**, not just this pass.
+
+### How It Works
+
+1. Choose a **gap** `g ≥ 1`.
+2. For each index `i = g..n-1`:
+   - Save `a[i]` to `temp`.
+   - Shift elements `a[i-g], a[i-2g], …` right while they are `> temp`.
+   - Insert `temp` into its position.
+3. Repeat for smaller gaps (e.g., `n/2, n/4, …, 1`) to complete Shell Sort.
+
+### Example (Single Pass, gap = 3)
+
+Array: `[23, 12, 1, 8, 34, 54, 2, 3]`  
+Subsequences by gap=3:
+- Indices `0,3,6`: `[23, 8, 2]` → insertion-sorted → `[2, 8, 23]`
+- Indices `1,4,7`: `[12, 34, 3]` → `[3, 12, 34]`
+- Indices `2,5`:   `[1, 54]`     → `[1, 54]`
+
+After the pass (recombined): `[*2*, *3*, 1, *8*, *12*, 54, *23*, *34*]`  
+Array is **3-sorted**, not fully sorted yet—next passes with smaller gaps finish the job.
+
+### Advantages
+
+- **In-place** and simple.
+- Great building block for **Shell Sort** (cache-friendly on small sublists).
+- Useful for **partially g-sorted** data.
+
+### Limitations
+
+- A single pass doesn’t fully sort unless `gap = 1`.
+- **Stability** is not guaranteed across different gap subsequences.
+- Worst-case **O(n²)** per pass.
+
+### Comparison (At a Glance)
+
+| Algorithm                | Fully Sorts? | Stable | In-Place | Typical Use                         |
+|--------------------------|--------------|--------|----------|--------------------------------------|
+| Insertion Sort (gap=1)   | Yes          | ✔      | ✔        | Small/narrow ranges, nearly-sorted   |
+| **Gapped Insertion (g>1)** | No (1 pass)  | ✖      | ✔        | Shell Sort building block            |
+| Shell Sort (sequence)    | Yes          | ✖      | ✔        | Faster-than-insertion on medium n    |
+
+### Implementation in C#.NET 8
+
+See **`GappedInsertionSort.cs`** (`SortingLibrary`):
+- `Sort(int[] array, int gap)` — single full-array gapped pass.
+- `SortRange(int[] array, int left, int right, int gap)` — bounded pass for a subrange.
+
+
+

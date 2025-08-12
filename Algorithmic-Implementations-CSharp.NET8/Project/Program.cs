@@ -87,6 +87,9 @@ class Program
 
         // Section: Intro Sort
         RunIntroSortDemo();
+
+        // Section: Gapped Insertion Sort
+        RunGappedInsertionSortDemo();
     }
 
     #region Algorithms
@@ -605,6 +608,33 @@ class Program
         IntroSort.Sort(array);
 
         Console.WriteLine("Sorted array using Intro Sort:");
+        PrintArray(array);
+    }
+
+
+    /// <summary>
+    ///     Demonstrates the usage of Gapped Insertion Sort (Shell-style sequence of gaps).
+    /// </summary>
+    private static void RunGappedInsertionSortDemo()
+    {
+        // Generate a random array of integers
+        Random random = new();
+        int[] array = new int[12];
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = random.Next(1, 101); // Random integers between 1 and 100
+        }
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Apply gapped insertion passes with a simple Shell sequence: n/2, n/4, ..., 1
+        for (int gap = array.Length / 2; gap >= 1; gap /= 2)
+        {
+            GappedInsertionSort.Sort(array, gap);
+        }
+
+        Console.WriteLine("Sorted array using Gapped Insertion (Shell-style):");
         PrintArray(array);
     }
 
