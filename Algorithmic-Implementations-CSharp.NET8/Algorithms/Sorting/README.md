@@ -1150,4 +1150,79 @@ See **`GappedInsertionSort.cs`** (`SortingLibrary`):
 - `SortRange(int[] array, int left, int right, int gap)` — bounded pass for a subrange.
 
 
+## Pancake Sort
+
+### Description
+
+**Pancake Sort** is a comparison-based, in-place sorting algorithm that uses only one operation: a **flip** (reversing a prefix of the array).  
+At each step, it locates the maximum element in the current unsorted prefix, flips it to the front (if needed), then flips it into its correct position at the end of that prefix. Repeat while shrinking the prefix.
+
+While more of a teaching/novel algorithm than a practical one on CPUs, it’s a neat demonstration of sorting with a restricted operation set.
+
+### Performance
+
+- **Time Complexity**:
+  - **Best Case**: O(n²)
+  - **Average Case**: O(n²)
+  - **Worst Case**: O(n²)
+- **Space Complexity**: O(1) (in-place)
+- **Stability**: No
+- **In-Place**: Yes
+
+> Even when the array is already sorted, the algorithm still scans for the maximum on each pass, leading to quadratic work overall.
+
+### How It Works
+
+1. Let `currSize` be the size of the current unsorted prefix (start from `n`, decrement to 2).
+2. Find the index of the **maximum** element in `array[0..currSize-1]`.
+3. If that max is not already at `currSize - 1`:
+   - **Flip** `array[0..maxIndex]` to bring it to the front.
+   - **Flip** `array[0..currSize-1]` to move it to its correct position at the end.
+4. Reduce `currSize` by 1 and repeat.
+
+### Steps and Example
+
+Given: `[3, 6, 1, 10, 2]`
+
+- `currSize = 5`, max in `[3, 6, 1, 10, 2]` is `10` at index `3`
+  - Flip `0..3` → `[10, 1, 6, 3, 2]`
+  - Flip `0..4` → `[2, 3, 6, 1, 10]`
+- `currSize = 4`, max in `[2, 3, 6, 1]` is `6` at index `2`
+  - Flip `0..2` → `[6, 3, 2, 1, 10]`
+  - Flip `0..3` → `[1, 2, 3, 6, 10]`
+- `currSize = 3`, max in `[1, 2, 3]` is `3` at index `2` → already in place
+- `currSize = 2`, max in `[1, 2]` is `2` at index `1` → already in place  
+Final: `[1, 2, 3, 6, 10]`
+
+### Advantages
+
+- **In-place**, uses only simple prefix reversals.
+- Fun/educational example of sorting with a constrained operation.
+- Conceptually aligns with problems involving “flipping” operations.
+
+### Limitations
+
+- **Quadratic time** in all cases → not competitive with `O(n log n)` sorts.
+- **Unstable** due to large segment reversals.
+
+### Time and Space Complexity Comparison with Other Sorting Algorithms
+
+| Algorithm         | Best Case Time | Average Case Time | Worst Case Time | Space | Stable | In-Place |
+|------------------|----------------|-------------------|-----------------|-------|--------|---------|
+| Insertion Sort   | O(n)           | O(n²)             | O(n²)           | O(1)  | Yes    | Yes     |
+| Merge Sort       | O(n log n)     | O(n log n)        | O(n log n)      | O(n)  | Yes    | No      |
+| Quick Sort       | O(n log n)     | O(n log n)        | O(n²)           | O(log n) | No  | Yes     |
+| Heap Sort        | O(n log n)     | O(n log n)        | O(n log n)      | O(1)  | No     | Yes     |
+| **Pancake Sort** | **O(n²)**      | **O(n²)**         | **O(n²)**       | O(1)  | No     | Yes     |
+
+### Implementation in C#.NET 8
+
+The `PancakeSort.cs` class in the `SortingLibrary` namespace implements:
+- `Sort(int[] array)` — main entry point
+- Internal helpers:
+  - `Flip(int[] array, int i)` — reverses prefix `0..i`
+  - `FindMaxIndex(int[] array, int n)` — finds max index in `[0..n-1]`
+
+Use `RunPancakeSortDemo()` in your `Program.cs` to see it in action with random data.
+
 
