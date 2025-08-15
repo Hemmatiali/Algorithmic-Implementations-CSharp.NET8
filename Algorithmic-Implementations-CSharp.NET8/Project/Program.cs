@@ -97,6 +97,9 @@ class Program
         // Section: Bogo Sort
         RunBogoSortDemo();
 
+        // Section: Gnome Sort
+        RunGnomeSortDemo();
+
     }
 
     #region Algorithms
@@ -698,6 +701,30 @@ class Program
         {
             Console.WriteLine($"Bogo Sort aborted: {ex.Message}");
         }
+    }
+
+
+    /// <summary>
+    ///     Demonstrates the usage of Gnome Sort algorithm.
+    /// </summary>
+    private static void RunGnomeSortDemo()
+    {
+        // Generate a random array of integers
+        Random random = new();
+        int[] array = new int[10];
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = random.Next(1, 101); // Random integers between 1 and 100
+        }
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Gnome Sort and display the result
+        GnomeSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Gnome Sort:");
+        PrintArray(array);
     }
 
 

@@ -1297,3 +1297,71 @@ Key points:
 > For demos, use **very small arrays** and set a **reasonable `maxShuffles`** cap to avoid runaway tests.
 
 
+
+## Gnome Sort
+
+### Description
+
+**Gnome Sort** is a simple, in-place, comparison-based sorting algorithm that works like a “walking” version of Insertion Sort using **adjacent swaps**.  
+The “gnome” moves forward when neighboring elements are in order; if it finds a pair out of order, it swaps them and **steps back** one position to continue fixing locally—much like how insertion sort shifts elements but via swaps.
+
+### Performance
+
+- **Time Complexity**:
+  - **Best Case**: O(n) *(already/nearly sorted)*
+  - **Average Case**: O(n²)
+  - **Worst Case**: O(n²)
+- **Space Complexity**: O(1) *(in-place)*
+- **Stability**: Yes *(only adjacent swaps of out-of-order pairs)*
+- **In-Place**: Yes
+
+### How It Works
+
+1. Start at index `i = 1`.
+2. If `a[i] >= a[i-1]`, move forward: `i++`.
+3. Otherwise, swap `a[i]` and `a[i-1]` and, if possible, step back: `i--`.  
+   If `i` reaches `0`, move forward to `1`.
+4. Continue until `i` reaches the end.
+
+### Steps and Example
+
+Given: `[34, 2, 25, 12]`
+
+- `i=1`: `34 > 2` → swap → `[2, 34, 25, 12]`; step back impossible → `i=1`
+- `i=1`: `2 ≤ 34` → `i=2`
+- `i=2`: `34 > 25` → swap → `[2, 25, 34, 12]`; step back → `i=1`
+- `i=1`: `2 ≤ 25` → `i=2`
+- `i=2`: `25 ≤ 34` → `i=3`
+- `i=3`: `34 > 12` → swap → `[2, 25, 12, 34]`; step back → `i=2`
+- `i=2`: `25 > 12` → swap → `[2, 12, 25, 34]`; step back → `i=1`
+- `i=1`: `2 ≤ 12` → `i=2`, then `i=3`, then `i=4` (done)
+
+Final: `[2, 12, 25, 34]`
+
+### Advantages
+
+- **Very simple** to implement and reason about.
+- **Stable** and **in-place**.
+- Performs well on **nearly sorted** data.
+
+### Limitations
+
+- **Quadratic** on average and in the worst case.
+- Generally slower than Insertion Sort due to more swaps.
+
+### Time and Space Complexity Comparison
+
+| Algorithm       | Best        | Average     | Worst       | Space | Stable | In-Place |
+|----------------|-------------|-------------|-------------|-------|--------|---------|
+| Insertion Sort | O(n)        | O(n²)       | O(n²)       | O(1)  | Yes    | Yes     |
+| Bubble Sort    | O(n)        | O(n²)       | O(n²)       | O(1)  | Yes    | Yes     |
+| **Gnome Sort** | O(n)        | O(n²)       | O(n²)       | O(1)  | Yes    | Yes     |
+| Merge Sort     | O(n log n)  | O(n log n)  | O(n log n)  | O(n)  | Yes    | No      |
+| Quick Sort     | O(n log n)  | O(n log n)  | O(n²)       | O(log n) | No | Yes     |
+
+### Implementation in C#.NET 8
+
+See **`GnomeSort.cs`** in the `SortingLibrary` namespace.  
+The algorithm iteratively walks forward/backward performing adjacent swaps until the entire array is ordered.
+
+
