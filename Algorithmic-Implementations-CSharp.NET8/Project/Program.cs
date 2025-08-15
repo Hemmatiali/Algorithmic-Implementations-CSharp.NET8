@@ -94,6 +94,9 @@ class Program
         // Section: Pancake Sort
         RunPancakeSortDemo();
 
+        // Section: Bogo Sort
+        RunBogoSortDemo();
+
     }
 
     #region Algorithms
@@ -664,6 +667,37 @@ class Program
 
         Console.WriteLine("Sorted array using Pancake Sort:");
         PrintArray(array);
+    }
+
+
+    /// <summary>
+    ///     Demonstrates the usage of Bogo Sort algorithm (educational; small n only).
+    /// </summary>
+    private static void RunBogoSortDemo()
+    {
+        // Generate a small random array (Bogo Sort is extremely slow for larger n)
+        Random random = new();
+        int[] array = new int[6];
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = random.Next(1, 21); // Random integers between 1 and 20
+        }
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        try
+        {
+            // Limit shuffles to avoid non-terminating behavior
+            BogoSort.Sort(array, maxShuffles: 10_000);
+
+            Console.WriteLine("Sorted array using Bogo Sort:");
+            PrintArray(array);
+        }
+        catch (InvalidOperationException ex)
+        {
+            Console.WriteLine($"Bogo Sort aborted: {ex.Message}");
+        }
     }
 
 

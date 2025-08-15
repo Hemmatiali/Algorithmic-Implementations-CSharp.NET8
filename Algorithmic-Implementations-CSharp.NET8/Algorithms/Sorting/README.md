@@ -1226,3 +1226,74 @@ The `PancakeSort.cs` class in the `SortingLibrary` namespace implements:
 Use `RunPancakeSortDemo()` in your `Program.cs` to see it in action with random data.
 
 
+## Bogo Sort
+
+### Description
+
+**Bogo Sort** (a.k.a. *Permutation Sort*, *Stupid Sort*) is a deliberately naive, randomized sorting algorithm that repeatedly
+**shuffles** the array until it happens to be sorted. It’s a fun teaching example for randomness and algorithmic
+complexity—not something you’d ever use in production.
+
+This repository’s implementation adds a **safety guard** (`maxShuffles`) to prevent unbounded runtimes.
+
+### Performance
+
+- **Time Complexity**:
+  - **Best**: O(n) — already sorted on the first check
+  - **Expected**: Θ(n · n!) — ~n work per attempt × ~n! shuffles expected
+  - **Worst**: Unbounded (no guarantee it ever finishes). With a shuffle cap: O(cap · n)
+- **Space Complexity**: O(1) — in-place (Fisher–Yates shuffle)
+- **Stability**: No
+- **In-Place**: Yes
+
+> Even tiny arrays can take a comically long time. Keep inputs **very small** (n ≤ 6) if you must run it.
+
+### How It Works
+
+1. **Check Sorted?** If the array is in non-decreasing order, stop.
+2. **Shuffle** the entire array uniformly at random (Fisher–Yates).
+3. Repeat steps 1–2 until sorted (or until the shuffle limit is reached).
+
+### Steps and Example
+
+Given: `[3, 1, 2]`
+
+1. Check → not sorted  
+2. Shuffle → `[2, 3, 1]` → not sorted  
+3. Shuffle → `[1, 2, 3]` → sorted ✅
+
+The number of shuffles is unpredictable; that’s the point (and the problem).
+
+### Advantages
+
+- **Trivially simple** to implement and reason about.
+- Illustrates **randomized algorithms** and **uniform shuffling** (Fisher–Yates).
+- Good for demos on **why complexity matters**.
+
+### Limitations
+
+- **Astronomically slow** in expectation: Θ(n · n!).
+- **Non-deterministic** runtime; can run “forever” without a guard.
+- Provides no practical advantage over real sorting algorithms.
+
+### Time and Space Complexity Comparison
+
+| Algorithm         | Best        | Average       | Worst         | Space | Stable | In-Place |
+|------------------|-------------|---------------|---------------|-------|--------|---------|
+| Insertion Sort   | O(n)        | O(n²)         | O(n²)         | O(1)  | Yes    | Yes     |
+| Merge Sort       | O(n log n)  | O(n log n)    | O(n log n)    | O(n)  | Yes    | No      |
+| Quick Sort       | O(n log n)  | O(n log n)    | O(n²)         | O(log n) | No  | Yes     |
+| Heap Sort        | O(n log n)  | O(n log n)    | O(n log n)    | O(1)  | No     | Yes     |
+| **Bogo Sort**    | **O(n)**    | **Θ(n · n!)** | **Unbounded** | O(1)  | No     | Yes     |
+
+### Implementation in C#.NET 8
+
+See **`BogoSort.cs`** in the `SortingLibrary` namespace.  
+Key points:
+- `Sort(int[] array, int maxShuffles = int.MaxValue)`  
+  - Repeatedly checks `IsSorted` and runs **Fisher–Yates** `Shuffle` until sorted.
+  - Throws `InvalidOperationException` if `maxShuffles` is exceeded.
+
+> For demos, use **very small arrays** and set a **reasonable `maxShuffles`** cap to avoid runaway tests.
+
+
