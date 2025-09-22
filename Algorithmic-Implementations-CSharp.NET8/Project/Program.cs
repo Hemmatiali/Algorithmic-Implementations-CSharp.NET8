@@ -111,6 +111,9 @@ class Program
 
         // Section: Sleep Sort
         RunSleepSortDemo();
+
+        // Section: Bead Sort
+        RunBeadSortDemo();
     }
 
     #region Algorithms
@@ -838,6 +841,31 @@ class Program
             Console.WriteLine($"Sleep Sort aborted: {ex.Message}");
         }
     }
+
+
+    /// <summary>
+    ///     Demonstrates the usage of Bead Sort algorithm (non-negative integers only).
+    /// </summary>
+    private static void RunBeadSortDemo()
+    {
+        // Generate a random array of NON-NEGATIVE integers (required by Bead Sort)
+        Random random = new();
+        int[] array = new int[10];
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = random.Next(0, 101); // 0..100
+        }
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Bead Sort and display the result
+        BeadSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Bead Sort:");
+        PrintArray(array);
+    }
+
 
     /// <summary>
     ///     Prints the elements of an array.

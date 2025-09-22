@@ -1661,3 +1661,70 @@ See **`SleepSort.cs`** in the `SortingLibrary` namespace.
   - Ensures correct ascending output even with scheduler jitter.
 
 > **Tip:** Keep values within a **small range** (e.g., 0–20) and use a tiny `unitDelayMs` for demos.
+
+
+## Bead Sort (Gravity Sort)
+
+### Description
+
+**Bead Sort** (a.k.a. **Gravity Sort**) is a visual/physical sorting idea that works only for **non-negative integers**.  
+Each number is represented as that many “beads” in a row. If you let gravity act on the vertical columns, beads fall to the bottom; counting the beads in each row (from top to bottom) yields the array in **non-decreasing** order.
+
+> This algorithm is mostly educational: it’s simple and neat, but memory-heavy and impractical for large values.
+
+### Performance
+
+- **Time Complexity**:  
+  - **Best/Average/Worst**: **O(n · m)**, where `n` is the number of items and `m = max(array)`  
+    (equivalently **O(S)** where `S = sum(array)`—one unit of work per “bead”)
+- **Space Complexity**: **O(n · m)** for the bead grid
+- **Stability**: **No**
+- **In-Place**: **No**
+
+### How It Works
+
+1. **Validate input**: all values must be **≥ 0**.
+2. **Build grid** of size `n × max` (rows = items, columns = bead positions).
+3. **Place beads**: row *i* gets `array[i]` beads from column `0..array[i]-1`.
+4. **Let gravity act**: for each column, count beads and move that many to the **bottom** rows.
+5. **Read result**: for each row, count beads across columns; that count is the sorted value.
+
+### Example
+
+Input: `[5, 3, 1, 4]` (`max = 5`)
+
+- Place beads per row.
+- For each column, beads “fall” to the bottom rows.
+- Row counts (top→bottom) become: `[1, 3, 4, 5]`.
+
+### Advantages
+
+- **Conceptually simple** and visually intuitive.
+- Works well for **small magnitudes** (`max` small).
+
+### Limitations
+
+- Requires large **O(n · max)** memory and time → impractical when values are large.
+- Only supports **non-negative integers**.
+- **Not stable** and **not in-place**.
+
+### Time and Space Complexity Comparison
+
+| Algorithm        | Best        | Average     | Worst       | Space  | Stable | In-Place |
+|------------------|-------------|-------------|-------------|--------|--------|---------|
+| Insertion Sort   | O(n)        | O(n²)       | O(n²)       | O(1)   | Yes    | Yes     |
+| Merge Sort       | O(n log n)  | O(n log n)  | O(n log n)  | O(n)   | Yes    | No      |
+| Quick Sort       | O(n log n)  | O(n log n)  | O(n²)       | O(log n) | No   | Yes     |
+| Counting Sort    | O(n + k)    | O(n + k)    | O(n + k)    | O(n + k) | Yes | No      |
+| **Bead Sort**    | **O(n·m)**  | **O(n·m)**  | **O(n·m)**  | **O(n·m)** | No | No      |
+
+*`k` = key range in Counting Sort; `m` = max value in Bead Sort.*
+
+### Implementation in C#.NET 8
+
+See **`BeadSort.cs`** in the `SortingLibrary` namespace.
+
+- Validates non-negative inputs
+- Builds a compact `byte[,]` bead grid of size `n × max`
+- Applies “gravity” per column, then reads back row counts into the original array
+
