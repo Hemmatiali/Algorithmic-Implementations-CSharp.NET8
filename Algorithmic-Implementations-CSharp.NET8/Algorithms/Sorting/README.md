@@ -1588,3 +1588,76 @@ Key points:
 > If you need **stability**, switch to a full counting-sort approach with **cumulative counts** and a temporary output array (extra O(n) space).
 
 
+## Sleep Sort (Asynchronous Novelty)
+
+### Description
+
+**Sleep Sort** is a tongue-in-cheek, timing-based “algorithm” that emits numbers after sleeping for a time proportional to their value. Smaller values wake earlier and are output first. It is **not** practical for real use and is presented for education and fun (randomness, scheduling, and why time-based algorithms are a bad idea).
+
+This implementation is **deterministic** despite scheduler jitter: each distinct value is assigned an emission order, tasks sleep proportionally, then wait for their turn to write to output. It also includes a **delay budget guard** to prevent long sleeps and supports **negative values** by delaying relative to the minimum.
+
+### Performance
+
+- **Time Complexity**:
+  - **Best**: O(n) + O(R·d) sleep time  *(R = value range; d = unit delay)*
+  - **Average/Worst**: O(n) work + **time dominated by sleeps** (can be very large)
+- **Space Complexity**: O(n) *(task bookkeeping + output buffer)*
+- **Stability**: Yes for equal values within this implementation (deterministic emission per key)
+- **In-Place**: No
+
+> Runtime depends on the **value range** and chosen **unit delay**; keep ranges small.
+
+### How It Works
+
+1. Compute `min` and `max` to determine the **range** and check against a **max total delay** guard.
+2. Count occurrences of each distinct value.
+3. For each distinct value `v`, start a task that:
+   - Sleeps for `(v - min) * unitDelayMs`.
+   - Waits until all smaller values have emitted (deterministic “turn”).
+   - Writes its `count(v)` copies into the output.
+4. Wait for all tasks; copy output back to the input array.
+
+### Example
+
+Input: `[5, 1, 3, 0, 4, 2]`, `unitDelayMs = 1`, `min = 0`
+
+- Task(0) sleeps 0ms → emits `0`
+- Task(1) sleeps 1ms → emits `1`
+- …
+- Task(5) sleeps 5ms → emits `5`
+
+Final: `[0, 1, 2, 3, 4, 5]`
+
+### Advantages
+
+- Cute demonstration for **concurrency**, **timers**, and **determinism** under scheduler jitter.
+- Very simple to reason about for **small ranges**.
+
+### Limitations
+
+- **Not practical**: runtime tied to numeric range and delays.
+- Requires threads/tasks and timers; **not deterministic** without additional ordering control.
+- Not in-place; allocates an output array and starts multiple tasks.
+
+### Time and Space Complexity Comparison
+
+| Algorithm        | Best        | Average       | Worst         | Space | Stable | In-Place |
+|------------------|-------------|---------------|---------------|-------|--------|---------|
+| Insertion Sort   | O(n)        | O(n²)         | O(n²)         | O(1)  | Yes    | Yes     |
+| Merge Sort       | O(n log n)  | O(n log n)    | O(n log n)    | O(n)  | Yes    | No      |
+| Quick Sort       | O(n log n)  | O(n log n)    | O(n²)         | O(log n) | No | Yes  |
+| Heap Sort        | O(n log n)  | O(n log n)    | O(n log n)    | O(1)  | No     | Yes     |
+| **Sleep Sort**   | O(n)+sleep  | O(n)+sleep    | O(n)+sleep    | O(n)  | Yes*   | No      |
+
+\*Stable in this implementation due to deterministic emission; classic Sleep Sort is not inherently stable.
+
+### Implementation in C#.NET 8
+
+See **`SleepSort.cs`** in the `SortingLibrary` namespace.
+
+- `Sort(int[] array, int unitDelayMs = 1, int maxTotalDelayMs = 30_000)`  
+  - Supports negatives by delaying relative to `min`.
+  - Guards against long sleeps via `maxTotalDelayMs`.
+  - Ensures correct ascending output even with scheduler jitter.
+
+> **Tip:** Keep values within a **small range** (e.g., 0–20) and use a tiny `unitDelayMs` for demos.

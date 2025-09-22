@@ -108,6 +108,9 @@ class Program
 
         // Section: Spaghetti Sort
         RunSpaghettiSortDemo();
+
+        // Section: Sleep Sort
+        RunSleepSortDemo();
     }
 
     #region Algorithms
@@ -803,6 +806,37 @@ class Program
 
         Console.WriteLine("Sorted array using Spaghetti Sort:");
         PrintArray(array);
+    }
+
+
+    /// <summary>
+    ///     Demonstrates the usage of Sleep Sort algorithm (novelty; small ranges only).
+    /// </summary>
+    private static void RunSleepSortDemo()
+    {
+        // Generate a small-range random array to keep total sleep time reasonable
+        Random random = new();
+        int[] array = new int[10];
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = random.Next(0, 21); // Values 0..20 → short total delay
+        }
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        try
+        {
+            // unitDelayMs kept small; maxTotalDelayMs guards against long waits
+            SleepSort.Sort(array, unitDelayMs: 2, maxTotalDelayMs: 1000);
+
+            Console.WriteLine("Sorted array using Sleep Sort:");
+            PrintArray(array);
+        }
+        catch (InvalidOperationException ex)
+        {
+            Console.WriteLine($"Sleep Sort aborted: {ex.Message}");
+        }
     }
 
     /// <summary>
