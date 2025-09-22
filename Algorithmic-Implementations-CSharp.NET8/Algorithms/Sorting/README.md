@@ -1518,3 +1518,73 @@ This implementation:
 - Copies the final merged result back into the source array.
 
 
+
+## Spaghetti Sort (Software Simulation)
+
+### Description
+
+**Spaghetti Sort** is a whimsical, physical sorting idea: place “spaghetti sticks” of different lengths together and repeatedly pull the tallest (or shortest).  
+In software, this is typically **simulated** by counting how many times each value occurs and then reconstructing the array from the smallest to the largest value — effectively behaving like a **Counting Sort** variant.
+
+This implementation supports **negative and positive integers** by normalizing values to a non-negative range.
+
+### Performance
+
+- **Time Complexity**:  
+  - **Best / Average / Worst**: **O(n + k)**  
+    - `n` = number of elements  
+    - `k` = range size = `max(array) - min(array) + 1`
+- **Space Complexity**: **O(k)** (frequency array)
+- **Stability**: **No** (this simple frequency-writeback variant does not preserve relative order)
+- **In-Place**: **No** (auxiliary frequency array required)
+
+> If `k` is small compared to `n`, this is fast. If `k` is very large, memory and time usage can be impractical.
+
+### How It Works
+
+1. **Scan for min/max** to compute the **range** `k`.
+2. **Allocate a frequency array** `freq[0..k-1]`.
+3. **Count** each value: `freq[value - min]++`.
+4. **Reconstruct** the original array from the frequency array in ascending order.
+
+### Example
+
+Input: `[34, -2, 25, 12, 22, 11, 90, 3, -18, 45]`  
+- `min = -18`, `max = 90`, `k = 109`  
+- Count each value into `freq`  
+- Write back values from `min` to `max` according to their counts →  
+Output: `[-18, -2, 3, 11, 12, 22, 25, 34, 45, 90]`
+
+### Advantages
+
+- **Linear time** in `n + k` for integer keys.
+- Handles **negative numbers** via normalization.
+- **Simple** and deterministic.
+
+### Limitations
+
+- Requires **O(k)** auxiliary memory → poor when the value range is large.
+- **Not stable** in this basic form (does not preserve order of equal keys).
+- Only applicable to **integer-like** keys (or data that can be discretized to a small range).
+
+### Time and Space Complexity Comparison
+
+| Algorithm         | Best        | Average     | Worst       | Space | Stable | In-Place |
+|------------------|-------------|-------------|-------------|-------|--------|---------|
+| Insertion Sort   | O(n)        | O(n²)       | O(n²)       | O(1)  | Yes    | Yes     |
+| Merge Sort       | O(n log n)  | O(n log n)  | O(n log n)  | O(n)  | Yes    | No      |
+| Quick Sort       | O(n log n)  | O(n log n)  | O(n²)       | O(log n) | No | Yes     |
+| Heap Sort        | O(n log n)  | O(n log n)  | O(n log n)  | O(1)  | No     | Yes     |
+| **Spaghetti Sort (sim.)** | **O(n + k)** | **O(n + k)** | **O(n + k)** | **O(k)** | No | No |
+
+### Implementation in C#.NET 8
+
+See **`SpaghettiSort.cs`** in the `SortingLibrary` namespace.  
+Key points:
+- Finds `min` and `max`, builds `freq` of size `max - min + 1`.
+- Rewrites the original array from `freq`.
+- Works with negative values via offset (`value - min`).
+
+> If you need **stability**, switch to a full counting-sort approach with **cumulative counts** and a temporary output array (extra O(n) space).
+
+

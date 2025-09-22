@@ -105,6 +105,9 @@ class Program
 
         // Section: Strand Sort
         RunStrandSortDemo();
+
+        // Section: Spaghetti Sort
+        RunSpaghettiSortDemo();
     }
 
     #region Algorithms
@@ -778,6 +781,29 @@ class Program
         PrintArray(array);
     }
 
+
+    /// <summary>
+    ///     Demonstrates the usage of Spaghetti Sort algorithm.
+    /// </summary>
+    private static void RunSpaghettiSortDemo()
+    {
+        // Generate a random array of integers
+        Random random = new();
+        int[] array = new int[10];
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = random.Next(-50, 101); // Random integers between -50 and 100
+        }
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Spaghetti Sort and display the result
+        SpaghettiSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Spaghetti Sort:");
+        PrintArray(array);
+    }
 
     /// <summary>
     ///     Prints the elements of an array.
