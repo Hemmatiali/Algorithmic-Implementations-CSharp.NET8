@@ -100,6 +100,11 @@ class Program
         // Section: Gnome Sort
         RunGnomeSortDemo();
 
+        // Section: Cocktail Sort
+        RunCocktailSortDemo();
+
+        // Section: Strand Sort
+        RunStrandSortDemo();
     }
 
     #region Algorithms
@@ -724,6 +729,52 @@ class Program
         GnomeSort.Sort(array);
 
         Console.WriteLine("Sorted array using Gnome Sort:");
+        PrintArray(array);
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Cocktail Sort algorithm.
+    /// </summary>
+    private static void RunCocktailSortDemo()
+    {
+        // Generate a random array of integers
+        Random random = new();
+        int[] array = new int[10];
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = random.Next(1, 101); // Random integers between 1 and 100
+        }
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Cocktail Sort and display the result
+        CocktailSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Cocktail Sort:");
+        PrintArray(array);
+    }
+
+    /// <summary>
+    ///     Demonstrates the usage of Strand Sort algorithm.
+    /// </summary>
+    private static void RunStrandSortDemo()
+    {
+        // Generate a random array of integers
+        Random random = new();
+        int[] array = new int[10];
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = random.Next(1, 101); // Random integers between 1 and 100
+        }
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(array);
+
+        // Perform Strand Sort and display the result
+        StrandSort.Sort(array);
+
+        Console.WriteLine("Sorted array using Strand Sort:");
         PrintArray(array);
     }
 

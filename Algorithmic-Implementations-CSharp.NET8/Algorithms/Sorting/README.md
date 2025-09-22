@@ -1365,3 +1365,156 @@ See **`GnomeSort.cs`** in the `SortingLibrary` namespace.
 The algorithm iteratively walks forward/backward performing adjacent swaps until the entire array is ordered.
 
 
+## Cocktail Sort (Shaker Sort)
+
+### Description
+
+**Cocktail Sort**—also known as **Shaker Sort**—is a bidirectional variant of Bubble Sort.  
+Each iteration performs two passes:
+
+1. **Forward pass**: bubbles the largest element to the right end.  
+2. **Backward pass**: bubbles the smallest element to the left end.
+
+By moving elements in both directions, Cocktail Sort can finish sooner than Bubble Sort on some inputs, especially when small elements start near the right end or large ones near the left.
+
+### Performance
+
+- **Time Complexity**:
+  - **Best**: O(n) *(already/nearly sorted; no swaps on a full cycle)*
+  - **Average**: O(n²)
+  - **Worst**: O(n²)
+- **Space Complexity**: O(1) *(in-place)*
+- **Stability**: Yes *(only adjacent swaps when strictly out of order)*
+- **In-Place**: Yes
+
+### How It Works
+
+1. Set `start = 0`, `end = n - 1`, and `swapped = true`.
+2. **Forward pass** from `start` to `end - 1`, swapping adjacent out-of-order pairs.
+3. If no swaps occurred, the array is sorted → stop.
+4. Decrement `end` (right boundary shrinks), reset `swapped = false`.
+5. **Backward pass** from `end` down to `start + 1`, swapping out-of-order pairs.
+6. Increment `start` (left boundary shrinks).
+7. Repeat while any swaps occur in a full forward+backward cycle.
+
+### Steps and Example
+
+Array: `[5, 1, 4, 2, 8]`
+
+- **Forward**: bubble up → `[1, 4, 2, 5, 8]`
+- **Backward**: bubble down → `[1, 2, 4, 5, 8]`  
+Next cycle makes no swaps → done.
+
+### Advantages
+
+- **Simple** and **in-place**.
+- Can outperform Bubble Sort on data where small/large elements are misplaced on opposite ends.
+- **Stable** due to adjacent swaps.
+
+### Limitations
+
+- Still **O(n²)** on average and worst case.
+- Slower than `O(n log n)` algorithms (Quick/Merge/Heap) for large arrays.
+
+### Time and Space Complexity Comparison
+
+| Algorithm        | Best        | Average     | Worst       | Space | Stable | In-Place |
+|------------------|-------------|-------------|-------------|-------|--------|---------|
+| Bubble Sort      | O(n)        | O(n²)       | O(n²)       | O(1)  | Yes    | Yes     |
+| **Cocktail Sort**| O(n)        | O(n²)       | O(n²)       | O(1)  | Yes    | Yes     |
+| Insertion Sort   | O(n)        | O(n²)       | O(n²)       | O(1)  | Yes    | Yes     |
+| Merge Sort       | O(n log n)  | O(n log n)  | O(n log n)  | O(n)  | Yes    | No      |
+| Quick Sort       | O(n log n)  | O(n log n)  | O(n²)       | O(log n) | No | Yes     |
+| Heap Sort        | O(n log n)  | O(n log n)  | O(n log n)  | O(1)  | No     | Yes     |
+
+### Implementation in C#.NET 8
+
+See **`CocktailSort.cs`** in the `SortingLibrary` namespace.  
+The implementation keeps shrinking the unsorted window (`start..end`) after each forward and backward pass and stops when a complete cycle performs **no swaps**.
+
+
+## Strand Sort
+
+### Description
+
+**Strand Sort** is a comparison-based, **stable** sorting algorithm that repeatedly extracts an
+increasing subsequence (called a **strand**) from the input and **merges** it into a running
+result. It behaves similarly to a *natural merge sort*: the more structure (pre-existing
+increasing runs) your data has, the better it performs.
+
+### Performance
+
+- **Time Complexity** *(data dependent)*:
+  - **Best**: O(n) — already (or largely) increasing; one strand + single merge
+  - **Average**: O(n log n) — typical when multiple moderate-length strands form naturally
+  - **Worst**: O(n²) — highly adversarial (e.g., strictly decreasing)
+- **Space Complexity**: O(n) — extra lists for input/result/strands
+- **Stability**: **Yes** — merge keeps equal elements in original order
+- **In-Place**: No
+
+### How It Works
+
+1. **Extract a strand**:
+   - Start with the first element from the remaining input.
+   - Scan input left-to-right, greedily append any element ≥ last in the strand.
+   - Remove appended elements from the input; the strand is strictly non-decreasing.
+
+2. **Merge** the new strand into the **result** list (which is always sorted).
+
+3. **Repeat** steps 1–2 until the input becomes empty.
+
+4. Copy the result back to the original array.
+
+### Steps and Example
+
+Given: `[34, 2, 25, 12, 22, 11]`
+
+1. **Extract strand #1** from input:
+   - Start with `34`, then no larger element appears immediately → strand₁ = `[34]`
+   - Result = `[]` → merge ⇒ Result = `[34]`
+   - Remaining input: `[2, 25, 12, 22, 11]`
+
+2. **Extract strand #2**:
+   - Start `2` → can append `25` → cannot append `12` (12 < 25) → append `?` skip `12` → append `?` `22` < 25 → skip → append `?` `11` < 25 → skip
+   - strand₂ = `[2, 25]`
+   - Merge `Result = [34]` with `[2, 25]` ⇒ `[2, 25, 34]`
+   - Remaining input: `[12, 22, 11]`
+
+3. **Extract strand #3**:
+   - Start `12` → append `22` → skip `11` → strand₃ = `[12, 22]`
+   - Merge `[2, 25, 34]` with `[12, 22]` ⇒ `[2, 12, 22, 25, 34]`
+   - Remaining input: `[11]`
+
+4. **Extract strand #4**: `[11]` → merge ⇒ `[2, 11, 12, 22, 25, 34]` ✅
+
+### Advantages
+
+- **Stable** and conceptually simple.
+- Performs well on **partially sorted** data (leverages natural runs).
+- Merge step is straightforward and can be optimized.
+
+### Limitations
+
+- Not in-place; requires **O(n)** extra memory.
+- Worst case can degrade to **O(n²)** (e.g., strictly decreasing inputs).
+- Less common than mainstream `O(n log n)` sorts (Merge/Quick/Heap) and usually slower in practice.
+
+### Time and Space Complexity Comparison
+
+| Algorithm        | Best        | Average     | Worst       | Space | Stable | In-Place |
+|------------------|-------------|-------------|-------------|-------|--------|---------|
+| Insertion Sort   | O(n)        | O(n²)       | O(n²)       | O(1)  | Yes    | Yes     |
+| Merge Sort       | O(n log n)  | O(n log n)  | O(n log n)  | O(n)  | Yes    | No      |
+| Quick Sort       | O(n log n)  | O(n log n)  | O(n²)       | O(log n) | No | Yes     |
+| Heap Sort        | O(n log n)  | O(n log n)  | O(n log n)  | O(1)  | No     | Yes     |
+| **Strand Sort**  | O(n)        | O(n log n)  | O(n²)       | O(n)  | Yes    | No      |
+
+### Implementation in C#.NET 8
+
+See **`StrandSort.cs`** in the `SortingLibrary` namespace.  
+This implementation:
+- Extracts strands greedily from a mutable input `List<int>`.
+- Uses a **stable** merge (`<=` when picking from the left list).
+- Copies the final merged result back into the source array.
+
+
